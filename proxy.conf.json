@@ -1,0 +1,8 @@
+{
+  "**": {
+    "target": "https://comem-webserv-2018-2019-g.herokuapp.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

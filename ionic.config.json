@@ -1,5 +1,13 @@
 {
   "name": "geekFeelings",
-  "integrations": {},
-  "type": "ionic-angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://comem-webserv-2018-2019-g.herokuapp.com"
+    }
+  ]
 }
