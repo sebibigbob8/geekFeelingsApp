@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 import { map } from 'rxjs/operators';
-import { HTTP } from '@ionic-native/http';
 import { AuthRequest } from '../../models/auth-request';
 import { AuthResponse } from '../../models/auth-response';
 import { User } from '../../models/user';
@@ -17,7 +16,7 @@ export class AuthProvider {
   private auth$: Observable<AuthResponse>;
   private authSource: ReplaySubject<AuthResponse>; // Observable
 
-  constructor(private http: HttpClient, private httpCordova: HTTP) {
+  constructor(private http: HttpClient) {
     this.authSource = new ReplaySubject(1);
     this.authSource.next(undefined);
     this.auth$ = this.authSource.asObservable();
@@ -37,7 +36,7 @@ export class AuthProvider {
 
   logIn(authRequest: AuthRequest): Observable<User> {
 
-    const authUrl = '/api';///login
+    const authUrl = 'https://comem-webserv-2018-2019-g.herokuapp.com/login';
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       map(auth => {
         this.authSource.next(auth);

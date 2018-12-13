@@ -1,10 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
-
+import * as bcrypt from "bcryptjs";
 import { AuthRequest } from '../../models/auth-request';
 import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
+import {User} from "../../models/user";
+import {async} from "@angular/core/testing";
+import has = Reflect.has;
 
 /**
  * Login page.
@@ -42,7 +45,7 @@ export class LoginPage {
   /**
    * Called when the login form is submitted.
    */
-  onSubmit($event) {
+  async onSubmit($event){
 
     // Prevent default HTML form behavior.
     $event.preventDefault();
@@ -54,11 +57,21 @@ export class LoginPage {
 
     // Hide any previous login error.
     this.loginError = false;
+    /* beautiful but useless
+    let plainPassword = this.authRequest.password;
+    const saltRounds = 10;
+    let cryptedRequest = new AuthRequest();
+    cryptedRequest.username = this.authRequest.username;
 
-    // Perform the authentication request to the API.
+    let hashedpsw = await bcrypt.hash(plainPassword,saltRounds);
+    cryptedRequest.password = hashedpsw;
+*/
     this.auth.logIn(this.authRequest).subscribe(undefined, err => {
-      this.loginError = true;
-      console.warn(`Authentication failed: ${err.message}`);
-    });
+          this.loginError = true;
+          console.warn(`Authentication failed: ${err.message}`);
+        })
   }
+
+
+
 }
