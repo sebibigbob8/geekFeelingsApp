@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {LoginPage} from '../login/login';
+import {RegisterRequest} from "../../models/register-request";
+import { NgForm } from '@angular/forms';
 
 /**
  * Generated class for the RegisterPage page.
@@ -13,6 +16,19 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'register.html',
 })
 export class RegisterPage {
+  loginPage = LoginPage;
+  registerRequest = RegisterRequest;
+  /**
+   * If true, it means that the authentication API has return a failed response
+   * (probably because the name or password is incorrect).
+   */
+  registerError: boolean;
+
+  /**
+   * The login form.
+   */
+  @ViewChild(NgForm)
+  form: NgForm;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
