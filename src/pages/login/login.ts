@@ -8,6 +8,7 @@ import { HomePage } from '../home/home';
 import {User} from "../../models/user";
 import {async} from "@angular/core/testing";
 import has = Reflect.has;
+import {RegisterPage} from '../register/register';
 
 /**
  * Login page.
@@ -25,6 +26,7 @@ export class LoginPage {
    * edits the login form. It will then be sent to the API.
    */
   authRequest: AuthRequest;
+  registerPage = RegisterPage;
 
   /**
    * If true, it means that the authentication API has return a failed response
@@ -54,18 +56,9 @@ export class LoginPage {
     if (this.form.invalid) {
       return;
     }
-
     // Hide any previous login error.
     this.loginError = false;
-    /* beautiful but useless
-    let plainPassword = this.authRequest.password;
-    const saltRounds = 10;
-    let cryptedRequest = new AuthRequest();
-    cryptedRequest.username = this.authRequest.username;
 
-    let hashedpsw = await bcrypt.hash(plainPassword,saltRounds);
-    cryptedRequest.password = hashedpsw;
-*/
     this.auth.logIn(this.authRequest).subscribe(undefined, err => {
           this.loginError = true;
           console.warn(`Authentication failed: ${err.message}`);

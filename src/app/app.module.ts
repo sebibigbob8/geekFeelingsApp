@@ -12,6 +12,9 @@ import {CreateRdvPage} from "../pages/create-rdv/create-rdv";
 import { AuthProvider } from '../providers/auth/auth';
 import {HttpClientModule} from "@angular/common/http";
 import {LoginPage} from "../pages/login/login";
+import {RegisterPage} from "../pages/register/register";
+import { MbscModule } from '@mobiscroll/angular-lite';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,15 @@ import {LoginPage} from "../pages/login/login";
     CreateRdvPage,
     RdvListPage,
     RdvMapPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    MbscModule,
+    FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,7 +40,8 @@ import {LoginPage} from "../pages/login/login";
     CreateRdvPage,
     RdvListPage,
     RdvMapPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

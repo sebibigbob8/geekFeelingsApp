@@ -52,6 +52,10 @@
       <p *ngIf='loginError' ion-text color='danger'>Name or password is invalid.</p>
 
     </div>
+    <div padding>
+      <!-- Registration link -->
+      <button ion-button block [navPush]="registerPage">Register</button>
+    </div>
   </form>
 
 </ion-content>
