@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { GlobalProvider } from '../providers/global/global';
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthInterceptorProvider } from '../providers/auth-interceptor/auth-interceptor';
+import {ProfilePage} from "../pages/profile/profile";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthInterceptorProvider } from '../providers/auth-interceptor/auth-inte
     RdvListPage,
     RdvMapPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -44,14 +46,14 @@ import { AuthInterceptorProvider } from '../providers/auth-interceptor/auth-inte
     RdvListPage,
     RdvMapPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    GlobalProvider,
     GlobalProvider,
     AuthInterceptorProvider,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true }

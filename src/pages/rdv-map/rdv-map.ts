@@ -20,7 +20,6 @@ export class RdvMapPage {
   }
 
   ionViewDidLoad() {
-    // TODO: make an HTTP request to retrieve the trips.
     const url = this.global.urlAPI+"/users";
     this.http.get(url,this.global.httpHeader).subscribe(users => {
       console.log(`users loaded`, users);

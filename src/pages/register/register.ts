@@ -4,6 +4,8 @@ import {LoginPage} from '../login/login';
 import {RegisterRequest} from "../../models/register-request";
 import {NgForm} from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
+import {GlobalProvider} from "../../providers/global/global";
+import {global} from "@angular/core/src/util";
 
 /**
  * Generated class for the RegisterPage page.
@@ -31,7 +33,7 @@ export class RegisterPage {
   @ViewChild(NgForm)
   form: NgForm;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public global:GlobalProvider,public navCtrl: NavController) {
 
     this.registerRequest = new RegisterRequest;
   }
@@ -46,7 +48,11 @@ export class RegisterPage {
     }
     // Hide any previous login error.
     this.registerError = false;
+    let url = this.global.urlAPI+"/users";
 
-    return "skrrrrt";
+    //TODO : Gérer la redirection après l'enregistrement
+    await this.http.post(url,this.registerRequest,this.global.httpHeader).subscribe();
+
+    this.navCtrl.push(this.loginPage);
   }
 }
