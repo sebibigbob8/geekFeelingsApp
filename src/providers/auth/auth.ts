@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { AuthRequest } from '../../models/auth-request';
 import { AuthResponse } from '../../models/auth-response';
 import { User } from '../../models/user';
+import {GlobalProvider} from "../global/global";
 
 /**
  * Authentication service for login/logout.
@@ -16,7 +17,8 @@ export class AuthProvider {
   private auth$: Observable<AuthResponse>;
   private authSource: ReplaySubject<AuthResponse>; // Observable
 
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient,public global: GlobalProvider) {
     this.authSource = new ReplaySubject(1);
     this.authSource.next(undefined);
     this.auth$ = this.authSource.asObservable();
@@ -36,7 +38,7 @@ export class AuthProvider {
 
   logIn(authRequest: AuthRequest): Observable<User> {
 
-    const authUrl = 'https://comem-webserv-2018-2019-g.herokuapp.com/login';
+    const authUrl = this.global.urlAPI+'/login';
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       map(auth => {
         this.authSource.next(auth);
@@ -50,5 +52,4 @@ export class AuthProvider {
     this.authSource.next(null);
     console.log('User logged out');
   }
-
 }

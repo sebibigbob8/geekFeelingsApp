@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {RegisterRequest} from "../../models/register-request";
-import { NgForm } from '@angular/forms';
+import {NgForm} from '@angular/forms';
+import {HttpClient} from "@angular/common/http";
 
 /**
  * Generated class for the RegisterPage page.
@@ -17,7 +18,7 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterPage {
   loginPage = LoginPage;
-  registerRequest = RegisterRequest;
+  registerRequest: RegisterRequest;
   /**
    * If true, it means that the authentication API has return a failed response
    * (probably because the name or password is incorrect).
@@ -30,14 +31,22 @@ export class RegisterPage {
   @ViewChild(NgForm)
   form: NgForm;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private http: HttpClient) {
+
+    this.registerRequest = new RegisterRequest;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
-  formSettings = {
-    theme: 'mobiscroll'
-  };
+  async onSubmit($event) {
+    // Prevent default HTML form behavior.
+    $event.preventDefault();
 
+    // Do not do anything if the form is invalid.
+    if (this.form.invalid) {
+      return;
+    }
+    // Hide any previous login error.
+    this.registerError = false;
+
+    return "skrrrrt";
+  }
 }

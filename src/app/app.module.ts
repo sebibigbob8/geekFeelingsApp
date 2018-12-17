@@ -15,6 +15,7 @@ import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import { MbscModule } from '@mobiscroll/angular-lite';
 import { FormsModule } from '@angular/forms';
+import { GlobalProvider } from '../providers/global/global';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,9 @@ import { FormsModule } from '@angular/forms';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    GlobalProvider,
+    GlobalProvider
   ]
 })
 export class AppModule {}
