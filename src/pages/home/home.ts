@@ -19,12 +19,12 @@ export class HomePage {
 
 
   tabs: HomePageTab[];
-
+//TODO: Add profile page
   constructor(public navCtrl: NavController) {
     this.tabs = [
-      { title: 'New RDV', icon: 'add', component: CreateRdvPage },
-      { title: 'RDV map', icon: 'map', component: RdvMapPage },
-      { title: 'RDV list', icon: 'list', component: RdvListPage }
+      { title: 'Profile', icon: 'add', component: CreateRdvPage },
+      { title: 'RDV Map', icon: 'map', component: RdvMapPage },
+      { title: 'My RDV', icon: 'list', component: RdvListPage }
     ];
   }
 

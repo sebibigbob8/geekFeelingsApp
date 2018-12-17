@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -11,9 +11,14 @@ import { Injectable } from '@angular/core';
 export class GlobalProvider {
 
   public urlAPI = "https://comem-webserv-2018-2019-g.herokuapp.com";
+  public httpHeader = {
+    headers: new HttpHeaders( {
+      'Content-Type' : 'application/json',
+    })
+  };
 
   constructor(public http: HttpClient) {
-    console.log('Hello GlobalProvider Provider');
+
   }
 
 }

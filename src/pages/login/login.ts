@@ -1,13 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
-import * as bcrypt from "bcryptjs";
 import { AuthRequest } from '../../models/auth-request';
 import { AuthProvider } from '../../providers/auth/auth';
-import { HomePage } from '../home/home';
-import {User} from "../../models/user";
-import {async} from "@angular/core/testing";
-import has = Reflect.has;
 import {RegisterPage} from '../register/register';
 
 /**
@@ -64,7 +59,4 @@ export class LoginPage {
           console.warn(`Authentication failed: ${err.message}`);
         })
   }
-
-
-
 }

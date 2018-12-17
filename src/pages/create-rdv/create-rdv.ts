@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the CreateRdvPage page.
  *
@@ -14,11 +14,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class CreateRdvPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private auth: AuthProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateRdvPage');
+  }
+  logOut() {
+    this.auth.logOut();
   }
 
 }
