@@ -84,7 +84,7 @@
       <button type='submit' [disabled]='form.invalid' ion-button block>Sign Up</button>
 
       <!-- Error message displayed if the login failed -->
-      <p *ngIf='loginError' ion-text color='danger'>A field is invalid.</p>
+      <p *ngIf='registerError' ion-text color='danger'>A field is invalid : {{backendMessage}}</p>
 
     </div>
     <div padding>

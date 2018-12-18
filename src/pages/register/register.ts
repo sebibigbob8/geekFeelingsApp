@@ -3,9 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {RegisterRequest} from "../../models/register-request";
 import {NgForm} from '@angular/forms';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
-import {global} from "@angular/core/src/util";
 
 /**
  * Generated class for the RegisterPage page.
@@ -26,6 +25,7 @@ export class RegisterPage {
    * (probably because the name or password is incorrect).
    */
   registerError: boolean;
+  backendMessage: string;
 
   /**
    * The login form.
@@ -48,11 +48,17 @@ export class RegisterPage {
     }
     // Hide any previous login error.
     this.registerError = false;
-    let url = this.global.urlAPI+"/users";
+    this.backendMessage = "";
+    //this.backendMessage = new HttpErrorResponse();
+    let url = this.global.urlAPI + "/users";
 
-    //TODO : Gérer la redirection après l'enregistrement
-    await this.http.post(url,this.registerRequest,this.global.httpHeader).subscribe();
-
-    this.navCtrl.push(this.loginPage);
+    await this.http.post(url, this.registerRequest, this.global.httpHeader).subscribe(user => console.log(user), err => {
+      this.registerError = true;
+      let html = document.createElement('div');
+      html.innerHTML = err.error;
+      this.backendMessage = html.getElementsByTagName("h1")[0].textContent;
+      console.warn('Registration failed:' + err.message);
+      //this.navCtrl.push(this.loginPage);
+    });
   }
 }
