@@ -28,6 +28,7 @@ export class LoginPage {
    * (probably because the name or password is incorrect).
    */
   loginError: boolean;
+  public comeFromRegister: boolean;
 
   /**
    * The login form.
@@ -37,6 +38,7 @@ export class LoginPage {
 
   constructor(private auth: AuthProvider, private navCtrl: NavController) {
     this.authRequest = new AuthRequest();
+    this.comeFromRegister = false;
   }
 
   /**
@@ -58,5 +60,9 @@ export class LoginPage {
           this.loginError = true;
           console.warn(`Authentication failed: ${err.message}`);
         })
+  }
+  public tamere()
+  {
+    return "CHEH";
   }
 }

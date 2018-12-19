@@ -54,6 +54,7 @@
     </div>
     <div padding>
       <!-- Registration link -->
+      <p *ngIf='comeFromRegister' ion-text color='green'>Welcome! Please enter your credential.</p>
       <button ion-button block [navPush]="registerPage">Register</button>
     </div>
   </form>
