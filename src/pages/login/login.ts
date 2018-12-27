@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { NavController, NavParams } from 'ionic-angular';
-import { AuthRequest } from '../../models/auth-request';
-import { AuthProvider } from '../../providers/auth/auth';
+import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Events, NavController} from 'ionic-angular';
+import {AuthRequest} from '../../models/auth-request';
+import {AuthProvider} from '../../providers/auth/auth';
 import {RegisterPage} from '../register/register';
 
 /**
@@ -22,29 +22,35 @@ export class LoginPage {
    */
   authRequest: AuthRequest;
   registerPage = RegisterPage;
+  comeFromRegister: string;
 
   /**
    * If true, it means that the authentication API has return a failed response
    * (probably because the name or password is incorrect).
    */
   loginError: boolean;
-  public comeFromRegister: boolean;
-
   /**
    * The login form.
    */
   @ViewChild(NgForm)
   form: NgForm;
 
-  constructor(private auth: AuthProvider, private navCtrl: NavController) {
+  constructor(private auth: AuthProvider, private navCtrl: NavController, public registerEvent: Events) {
     this.authRequest = new AuthRequest();
-    this.comeFromRegister = false;
+    this.comeFromRegister = "hidden";
+    this.registerEvent.subscribe('registration', data => {
+      if (data) {
+        console.log("registration event");
+        this.comeFromRegister = "visible";
+      }
+
+    })
   }
 
   /**
    * Called when the login form is submitted.
    */
-  async onSubmit($event){
+  async onSubmit($event) {
 
     // Prevent default HTML form behavior.
     $event.preventDefault();
@@ -57,12 +63,8 @@ export class LoginPage {
     this.loginError = false;
 
     this.auth.logIn(this.authRequest).subscribe(undefined, err => {
-          this.loginError = true;
-          console.warn(`Authentication failed: ${err.message}`);
-        })
-  }
-  public tamere()
-  {
-    return "CHEH";
+      this.loginError = true;
+      console.warn(`Authentication failed: ${err.message}`);
+    })
   }
 }

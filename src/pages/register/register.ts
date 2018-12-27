@@ -1,11 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, Events} from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {RegisterRequest} from "../../models/register-request";
 import {NgForm} from '@angular/forms';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
-import {delayWhen} from "rxjs/operators";
 
 /**
  * Generated class for the RegisterPage page.
@@ -26,7 +25,6 @@ export class RegisterPage {
    * (probably because the name or password is incorrect).
    */
   registerError: boolean;
-  registered: boolean;
   backendMessage: string;
 
   /**
@@ -35,7 +33,7 @@ export class RegisterPage {
   @ViewChild(NgForm)
   form: NgForm;
 
-  constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController) {
+  constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController, public registerEvent: Events) {
 
     this.registerRequest = new RegisterRequest;
   }
@@ -51,17 +49,14 @@ export class RegisterPage {
     // Hide any previous login error.
     this.registerError = false;
     this.backendMessage = "";
-    this.registered = false;
-    //this.backendMessage = new HttpErrorResponse();
     let url = this.global.urlAPI + "/users";
 
-    // TODO: Message retour en HTML ? go en JSON tarace
     await this.http.post(url, this.registerRequest, this.global.httpHeader).subscribe(user => {
-
-      this.registered = true;
+      this.registerEvent.publish('registration',true);
       this.navCtrl.push(this.loginPage);
     }, err => {
       this.registerError = true;
+      //Get the proper backend message
       let html = document.createElement('div');
       html.innerHTML = err.error;
       if(html.getElementsByTagName("h1")[0])
