@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {AuthProvider} from "../../providers/auth/auth";
+import {NgForm} from "@angular/forms";
 /**
  * Generated class for the ProfilePage page.
  *
@@ -14,6 +15,8 @@ import {AuthProvider} from "../../providers/auth/auth";
 })
 export class ProfilePage {
 
+  @ViewChild(NgForm)
+  form: NgForm;
   constructor(public navCtrl: NavController, public navParams: NavParams,private auth: AuthProvider) {
   }
 

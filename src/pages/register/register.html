@@ -33,7 +33,7 @@
       <ion-item>
         <ion-label floating>Username</ion-label>
         <ion-input (change)="isUnique(usernameInput.value)" type='text' name='username'
-                   #usernameInput='ngModel' [(ngModel)]='registerRequest.username' required></ion-input>
+                   #usernameInput='ngModel' [(ngModel)]='registerRequest.username' required minlength="6"></ion-input>
       </ion-item>
       <ion-item *ngIf='usernameInput.invalid && usernameInput.dirty' no-lines>
         <p ion-text color='danger'>Username must be valid</p>
@@ -46,7 +46,7 @@
       <ion-item>
         <ion-label floating>Password</ion-label>
         <ion-input type='password' name='password'
-                   #passwordInput='ngModel' [(ngModel)]='registerRequest.password' required></ion-input>
+                   #passwordInput='ngModel' [(ngModel)]='registerRequest.password' required minlength="6"></ion-input>
       </ion-item>
       <ion-item *ngIf='passwordInput.invalid && passwordInput.dirty' no-lines>
         <p ion-text color='danger'>Password is required.</p>
