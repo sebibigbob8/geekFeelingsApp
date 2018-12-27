@@ -26,6 +26,7 @@ export class RegisterPage {
    */
   registerError: boolean;
   backendMessage: string;
+  unique: boolean;
 
   /**
    * The login form.
@@ -36,6 +37,7 @@ export class RegisterPage {
   constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController, public registerEvent: Events) {
 
     this.registerRequest = new RegisterRequest;
+    this.unique = false;
   }
 
   async onSubmit($event) {
@@ -52,16 +54,36 @@ export class RegisterPage {
     let url = this.global.urlAPI + "/users";
 
     await this.http.post(url, this.registerRequest, this.global.httpHeader).subscribe(user => {
-      this.registerEvent.publish('registration',true);
+      this.registerEvent.publish('registration', true);
       this.navCtrl.push(this.loginPage);
     }, err => {
       this.registerError = true;
       //Get the proper backend message
       let html = document.createElement('div');
       html.innerHTML = err.error;
-      if(html.getElementsByTagName("h1")[0])
+      if (html.getElementsByTagName("h1")[0])
         this.backendMessage = html.getElementsByTagName("h1")[0].textContent;
       console.log('Registration failed:' + err.message);
     });
+  }
+
+  /**
+   * Detect if the username is unique as soon as the user enter the name
+   * @param username
+   */
+  async isUnique(username) {
+    if(username === "")
+    {
+      this.unique = true;
+      return;
+    }
+    let url = this.global.urlAPI + "/users/unique/" + username;
+    await this.http.get(url, this.global.httpHeader).subscribe(response => {
+      // @ts-ignore
+      this.unique = response.Result;
+
+    },err =>{
+      console.log(err);
+    })
   }
 }
