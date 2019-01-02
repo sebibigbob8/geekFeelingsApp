@@ -13,11 +13,13 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import { MbscModule } from '@mobiscroll/angular-lite';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { GlobalProvider } from '../providers/global/global';
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthInterceptorProvider } from '../providers/auth-interceptor/auth-interceptor';
 import {ProfilePage} from "../pages/profile/profile";
+import {TagInputModule} from "ngx-chips";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,10 @@ import {ProfilePage} from "../pages/profile/profile";
     HttpClientModule,
     MbscModule,
     FormsModule,
-    IonicStorageModule.forRoot()
+    ReactiveFormsModule,
+    IonicStorageModule.forRoot(),
+    TagInputModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

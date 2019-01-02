@@ -1,9 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Events, NavController} from 'ionic-angular';
+import {Events} from 'ionic-angular';
 import {AuthRequest} from '../../models/auth-request';
 import {AuthProvider} from '../../providers/auth/auth';
 import {RegisterPage} from '../register/register';
+import {Storage} from "@ionic/storage";
 
 /**
  * Login page.
@@ -35,7 +36,7 @@ export class LoginPage {
   @ViewChild(NgForm)
   form: NgForm;
 
-  constructor(private auth: AuthProvider, private navCtrl: NavController, public registerEvent: Events) {
+  constructor(private auth: AuthProvider, public registerEvent: Events,private storage: Storage) {
     this.authRequest = new AuthRequest();
     this.comeFromRegister = "hidden";
     this.registerEvent.subscribe('registration', data => {
@@ -43,7 +44,6 @@ export class LoginPage {
         console.log("registration event");
         this.comeFromRegister = "visible";
       }
-
     })
   }
 
@@ -54,14 +54,13 @@ export class LoginPage {
 
     // Prevent default HTML form behavior.
     $event.preventDefault();
-
     // Do not do anything if the form is invalid.
     if (this.form.invalid) {
       return;
     }
     // Hide any previous login error.
     this.loginError = false;
-
+    this.storage.set('username',this.authRequest.username);
     this.auth.logIn(this.authRequest).subscribe(undefined, err => {
       this.loginError = true;
       console.warn(`Authentication failed: ${err.message}`);

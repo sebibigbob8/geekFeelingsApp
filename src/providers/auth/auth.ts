@@ -55,15 +55,15 @@ export class AuthProvider {
       })
     );
   }
-
   logOut() {
     this.authSource.next(null);
     this.storage.remove('auth');
-
+    this.storage.remove('username');
     console.log('User logged out');
   }
 
   private saveAuth(auth: AuthResponse): Observable<void> {
     return Observable.fromPromise(this.storage.set('auth', auth));
   }
+
 }
