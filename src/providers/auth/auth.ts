@@ -50,7 +50,6 @@ export class AuthProvider {
       }),
       map(auth => {
         this.authSource.next(auth);
-        console.log(`User ${auth.user.name} logged in`);
         return auth.user;
       })
     );

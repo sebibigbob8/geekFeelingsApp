@@ -22,49 +22,37 @@ export class ProfilePage {
 
   @ViewChild(NgForm)
   form: NgForm;
-  items = [];
   profileRequest: ProfileRequest;
   username = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private http: HttpClient, public global: GlobalProvider, private storage: Storage) {
+    this.profileRequest = new ProfileRequest();
     storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
       http.get(global.urlAPI + `/users/${this.username}?username=true`, this.global.httpHeader).subscribe(response => {
-        this.items = response[0].tag;
+        this.profileRequest.tag = response['tag'];
       }, error => console.warn(error))
     });
-    this.profileRequest = new ProfileRequest();
-
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-  }
-
-  //TODO: Do the submit process, the API do not provide tag on patch route, check if the patch route is available with username instead of id
-  onSubmit($event) {
+  async onSubmit($event) {
     // Prevent default HTML form behavior.
     $event.preventDefault();
     // Do not do anything if the form is invalid.
     if (this.form.invalid) {
       return;
     }
-    this.profileRequest.tag = this.items;
-
     let url = this.global.urlAPI + `/users/${this.username}?username=true`;
-    this.http.patch(url, this.profileRequest, this.global.httpHeader).subscribe(user => {
+    await this.http.patch(url, this.profileRequest, this.global.httpHeader).subscribe(user => {
       console.log(user);
     }, err => {
-      console.log('Registration failed:' + err.message);
+      console.error(
+        `Backend returned code ${err.status}, ` +
+        `body was: ${err.error}`);
+      console.warn("with this request : "+this.profileRequest.tag+"-"+this.profileRequest.description);
     });
-
-
   }
-
   logOut() {
     this.auth.logOut();
   }
 
-  showItems() {
-    console.log(this.items);
-  }
 }
