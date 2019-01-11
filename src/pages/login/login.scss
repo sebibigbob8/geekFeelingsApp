@@ -1,3 +1,25 @@
 page-login {
-
 }
+
+body {
+    color:black;
+    background-color:white;
+    background-image:url(assets/imgs/pixel.png);
+}
+
+#login, #register {
+    background-color: #2DB1FF;
+}
+
+.LR {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    padding: 2em;
+}
+
+.scroll-content, .item{
+    background-color:rgb(64, 241, 138);
+}
+
+
