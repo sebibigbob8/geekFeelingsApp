@@ -1,3 +1,43 @@
 page-login {
-
 }
+
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 84%;
+    align-content: center;
+}
+
+
+.col {
+    background-color: #2DB1FF;
+    padding: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10%;
+}
+
+#login {
+    padding-left: 2.7em;
+    padding-right: 2.7em;
+}
+
+#register {
+    margin-left: 2em;
+}
+
+.LR {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    padding: 2em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/**.scroll-content, .item{
+    background-color:rgb(0, 0, 0);
+}*/
+
+
