@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Events} from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
+import {CreateRDV} from '../../models/create-rdv';
+import { HttpClient } from '@angular/common/http';
+import { GlobalProvider } from '../../providers/global/global';
 
 /**
  * Generated class for the RdvListPage page.
@@ -14,11 +19,49 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class RdvListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+
+  createrdv: CreateRDV;
+
+
+  /**
+  * If true, it means that one of the inputs doesn't fit the restrictions
+  */
+  createRdvError: boolean;
+
+  @ViewChild(NgForm)
+    form: NgForm;
+
+  constructor(private http: HttpClient,public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public registerEvent: Events) {
+
+  this.createrdv= new CreateRDV();
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RdvListPage');
   }
 
-}
+/**
+   * Called when the create-rdv form is submitted.
+   */
+  async onSubmit($event) {
+
+    // Prevent default HTML form behavior.
+    $event.preventDefault();
+    // Do not do anything if the form is invalid.
+    if (this.form.invalid) {
+      return;
+    }
+
+    let url = this.global.urlAPI + "/users";
+    // Hide any previous create rdv error.
+    this.http.post(url, this.registerRequest, this.global.httpHeader).subscribe(user => {
+
+        })
+
+      }
+    }
+
+
+
