@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
+import {config} from "../../app/config";
 
 /**
  * Generated class for the RdvMapPage page.
@@ -20,7 +21,7 @@ export class RdvMapPage {
   }
 
   ionViewDidLoad() {
-    const url = this.global.urlAPI+"/users";
+    const url = config.apiUrl+"/users";
     this.http.get(url,this.global.httpHeader).subscribe(users => {
       console.log(`users loaded`, users);
     });

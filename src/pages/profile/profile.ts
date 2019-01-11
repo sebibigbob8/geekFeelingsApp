@@ -8,6 +8,7 @@ import {Storage} from "@ionic/storage";
 import {ProfileRequest} from "../../models/profile-request";
 import {QimgImage} from "../../models/QimgImage";
 import {PictureProvider} from "../../providers/picture/picture";
+import {config} from "../../app/config";
 
 /**
  * Generated class for the ProfilePage page.
@@ -33,10 +34,10 @@ export class ProfilePage {
     this.profileRequest = new ProfileRequest();
     storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
-      http.get(`${global.urlAPI}/users/${this.username}?username=true`, this.global.httpHeader).subscribe(response => {
+      http.get(`${config.apiUrl}/users/${this.username}?username=true`, this.global.httpHeader).subscribe(response => {
         this.profileRequest.tag = response['tag'];
       }, error => console.warn(error));
-      http.get(`${global.urlAPI}/users/${this.username}/picture?username=true`,this.global.httpHeader).subscribe(response =>
+      http.get(`${config.apiUrl}/users/${this.username}/picture?username=true`,this.global.httpHeader).subscribe(response =>
       {
         this.pictures = response;
       });
@@ -51,7 +52,7 @@ export class ProfilePage {
     if (this.form.invalid) {
       return;
     }
-    let url = this.global.urlAPI + `/users/${this.username}?username=true`;
+    let url = `${config.apiUrl}/users/${this.username}?username=true`;
     await this.http.patch(url, this.profileRequest, this.global.httpHeader).subscribe(user => {
       console.log(user);
     }, err => {

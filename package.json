@@ -8,7 +8,9 @@
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint"
+    "lint": "ionic-app-scripts lint",
+    "dev": "cp src/app/config.dev.ts src/app/config.ts",
+    "prod": "cp src/app/config.prod.ts src/app/config.ts"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
