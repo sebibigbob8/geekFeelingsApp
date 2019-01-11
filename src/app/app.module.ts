@@ -1,25 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import {BrowserModule} from '@angular/platform-browser';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar';
+import {MyApp} from './app.component';
+import {HomePage} from '../pages/home/home';
 import {RdvListPage} from "../pages/rdv-list/rdv-list";
 import {RdvMapPage} from "../pages/rdv-map/rdv-map";
 import {CreateRdvPage} from "../pages/create-rdv/create-rdv";
-import { AuthProvider } from '../providers/auth/auth';
+import {AuthProvider} from '../providers/auth/auth';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
-import { MbscModule } from '@mobiscroll/angular-lite';
+import {MbscModule} from '@mobiscroll/angular-lite';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { GlobalProvider } from '../providers/global/global';
-import { IonicStorageModule } from '@ionic/storage';
-import { AuthInterceptorProvider } from '../providers/auth-interceptor/auth-interceptor';
+import {GlobalProvider} from '../providers/global/global';
+import {IonicStorageModule} from '@ionic/storage';
+import {AuthInterceptorProvider} from '../providers/auth-interceptor/auth-interceptor';
 import {ProfilePage} from "../pages/profile/profile";
 import {TagInputModule} from "ngx-chips";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PictureProvider} from '../providers/picture/picture';
+import {Camera} from "@ionic-native/camera";
 
 @NgModule({
   declarations: [
@@ -60,8 +62,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     GlobalProvider,
+    PictureProvider,
+    Camera,
     AuthInterceptorProvider,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true }
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true}
+
   ]
 })
-export class AppModule {}
+export class AppModule {
+}

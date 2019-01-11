@@ -13,12 +13,14 @@
 
 <ion-content padding>
   <div name="picturesDiv">
-    <!-- TODO:
-      Get all pictures
-      Tags system
-      Add a picture, how to access to the device's camera and/or gallery
-      -->
-    <img src="BAH.jpg">
+    <span>My pictures</span>
+    <ul>
+      <li *ngFor="let picture of pictures">
+        <span>src :{{picture.src}}</span>
+      </li>
+    </ul>
+    <button ion-button (click)='takePicture()'>Take picture</button>
+    <img *ngIf='picture' [src]='picture.url' />
   </div>
   <div name="myInformations">
     <form (submit)='onSubmit($event)'>
