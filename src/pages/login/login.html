@@ -5,21 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
+    <div class="list item item-divider">
+      <a class="item item-thumbnail-left">
+        <img class="logo" src="assets/imgs/pixel_1.png">
+      </a>
+    </div>
   <form (submit)='onSubmit($event)'>
-    <ion-list>
+    <ion-list class="item item-divider">
 
       <!-- Name input -->
       <ion-item>
-        <ion-label floating>Name</ion-label>
+        <ion-label floating>Username</ion-label>
         <ion-input type='text' name='name'
                    #nameInput='ngModel' [(ngModel)]='authRequest.username' required></ion-input>
       </ion-item>
@@ -42,20 +40,20 @@
       </ion-item>
 
     </ion-list>
-
-    <div padding>
-
-      <!-- Submit button -->
-      <button type='submit' [disabled]='form.invalid' ion-button block>Log in</button>
-
-      <!-- Error message displayed if the login failed -->
-      <p *ngIf='loginError' ion-text color='danger'>Name or password is invalid.</p>
-
-    </div>
-    <div padding>
-      <!-- Registration link -->
-      <p [ngStyle]="{'visibility': comeFromRegister}" ion-text color='green'>Welcome! Please enter your credential.</p>
-      <button ion-button block [navPush]="registerPage">Register</button>
+    <div class="LR item item-divider row">
+      <div padding-bottom >
+    
+        <!-- Submit button -->
+        <button id="login" class="col" type='submit' [disabled]='form.invalid' ion-button >Log in</button>
+    
+        <!-- Error message displayed if the login failed -->
+        <p *ngIf='loginError' ion-text color='danger'>Name or password is invalid.</p>
+    
+      </div>
+      <div>
+        <!-- Registration link -->
+        <button id="register" class="col" ion-button [navPush]="registerPage">Register</button>
+      </div>
     </div>
   </form>
 
