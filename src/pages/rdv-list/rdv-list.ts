@@ -5,6 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProvider } from '../../providers/global/global';
+import { RegisterRequest } from '../../models/register-request';
 
 /**
  * Generated class for the RdvListPage page.
@@ -21,7 +22,7 @@ export class RdvListPage {
 
 
 
-  createrdv: CreateRDV;
+
 
 
   /**
@@ -31,6 +32,7 @@ export class RdvListPage {
 
   @ViewChild(NgForm)
     form: NgForm;
+    createrdv: CreateRDV;
 
   constructor(private http: HttpClient,public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public registerEvent: Events) {
 
@@ -54,11 +56,13 @@ export class RdvListPage {
       return;
     }
 
-    let url = this.global.urlAPI + "/users";
+    let url = this.global.urlAPI + "/rdvs";
     // Hide any previous create rdv error.
-    this.http.post(url, this.registerRequest, this.global.httpHeader).subscribe(user => {
-
-        })
+    console.log(url);
+    this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {
+      console.log(rdv);
+        }, err =>{
+          console.error(err);})
 
       }
     }

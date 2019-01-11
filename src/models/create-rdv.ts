@@ -1,5 +1,6 @@
 export class CreateRDV {
-  title: string;
+  creator: string;
+  purposeTitle: string;
   description: string;
   date: Date;
   city: string;
