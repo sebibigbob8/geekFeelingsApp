@@ -38,7 +38,7 @@ export class RegisterPage {
   constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController, public registerEvent: Events) {
 
     this.registerRequest = new RegisterRequest;
-    this.unique = false;
+    this.unique = true;
   }
 
   async onSubmit($event) {
@@ -46,7 +46,7 @@ export class RegisterPage {
     $event.preventDefault();
 
     // Do not do anything if the form is invalid.
-    if (this.form.invalid) {
+    if (this.form.invalid || !this.unique) {
       return;
     }
     // Hide any previous login error.
@@ -83,9 +83,10 @@ export class RegisterPage {
     await this.http.get(url, this.global.httpHeader).subscribe(response => {
       // @ts-ignore
       this.unique = response.Result;
-
+      if(!this.unique)
+        this.form.controls['username'].setErrors({'incorrect': true});
     },err =>{
-      console.log(err);
+      console.error(err);
     })
   }
 }

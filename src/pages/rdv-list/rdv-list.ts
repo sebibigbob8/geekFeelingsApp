@@ -6,6 +6,7 @@ import {CreateRDV} from '../../models/create-rdv';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProvider } from '../../providers/global/global';
 import { RegisterRequest } from '../../models/register-request';
+import {config} from "../../app/config";
 
 /**
  * Generated class for the RdvListPage page.
@@ -56,7 +57,7 @@ export class RdvListPage {
       return;
     }
 
-    let url = this.global.urlAPI + "/rdvs";
+    let url = config.apiUrl+"/rdvs";
     // Hide any previous create rdv error.
     console.log(url);
     this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {

@@ -32,13 +32,13 @@
        -->
       <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input (change)="isUnique(usernameInput.value)" type='text' name='username'
+        <ion-input (keyup)="isUnique(usernameInput.value)" type='text' name='username'
                    #usernameInput='ngModel' [(ngModel)]='registerRequest.username' required minlength="6"></ion-input>
       </ion-item>
       <ion-item *ngIf='usernameInput.invalid && usernameInput.dirty' no-lines>
-        <p ion-text color='danger'>Username must be valid</p>
+        <p ion-text color='danger'>Username must be valid : minlength = 6</p>
       </ion-item>
-      <ion-item *ngIf='!unique && usernameInput.dirty' no-lines>
+      <ion-item *ngIf='!unique' no-lines>
         <p ion-text color='danger'>Username already exist.</p>
       </ion-item>
 
