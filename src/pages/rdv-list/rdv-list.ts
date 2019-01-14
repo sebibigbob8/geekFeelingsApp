@@ -34,6 +34,7 @@ export class RdvListPage {
   @ViewChild(NgForm)
     form: NgForm;
     createrdv: CreateRDV;
+  auth: any;
 
   constructor(private http: HttpClient,public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public registerEvent: Events) {
 
@@ -62,6 +63,8 @@ export class RdvListPage {
     console.log(url);
     this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {
       console.log(rdv);
+      console.log("123456789")
+      console.log(this.auth.getuser());
         }, err =>{
           console.error(err);})
 
