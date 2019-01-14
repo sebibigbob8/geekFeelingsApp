@@ -65,12 +65,10 @@ export class RdvListPage {
     console.log(url);
     this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {
       console.log(rdv);
-      console.log("123456789")
-      console.log(this.auth.getuser());
         }, err =>{
           //console.log(rdv);
       console.log("123456789")
-      console.log(this.auth.getuser());
+      //console.log(this.auth.getuser());
           console.error(err);})
 
       }
