@@ -20,8 +20,8 @@
       <!-- Name input PS: Do not use 'name' for propriety name cause of bugs -->
       <ion-item>
         <ion-label floating>First Name</ion-label>
-        <ion-input type='text' name='firstName'
-                   #firstNameInput='ngModel' [(ngModel)]='registerRequest.name' required></ion-input>
+        <ion-input type='text' name='firstName' #firstNameInput='ngModel' [(ngModel)]='registerRequest.name'
+                   required></ion-input>
       </ion-item>
       <!-- Error message displayed if the name is invalid -->
       <ion-item *ngIf='firstNameInput.invalid && firstNameInput.dirty' no-lines>
@@ -32,8 +32,10 @@
        -->
       <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input (keyup)="isUnique(usernameInput.value)" type='text' name='username'
-                   #usernameInput='ngModel' [(ngModel)]='registerRequest.username' required minlength="6"></ion-input>
+
+        <ion-input (change)="isUnique(usernameInput.value)" type='text' name='username' #usernameInput='ngModel'
+                   [(ngModel)]='registerRequest.username' required minlength="6"></ion-input>
+
       </ion-item>
       <ion-item *ngIf='usernameInput.invalid && usernameInput.dirty' no-lines>
         <p ion-text color='danger'>Username must be valid : minlength = 6</p>
@@ -45,8 +47,8 @@
       <!-- Password input -->
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type='password' name='password'
-                   #passwordInput='ngModel' [(ngModel)]='registerRequest.password' required minlength="6"></ion-input>
+        <ion-input type='password' name='password' #passwordInput='ngModel' [(ngModel)]='registerRequest.password'
+                   required minlength="6"></ion-input>
       </ion-item>
       <ion-item *ngIf='passwordInput.invalid && passwordInput.dirty' no-lines>
         <p ion-text color='danger'>Password is required.</p>
@@ -54,8 +56,8 @@
 
       <!-- Date of birth input -->
       <ion-item>
-        <ion-input type='date' name='birthDate'
-                   #birthDateInput='ngModel' [(ngModel)]='registerRequest.dateBirth' required></ion-input>
+        <ion-input type='date' name='birthDate' #birthDateInput='ngModel' [(ngModel)]='registerRequest.dateBirth'
+                   required></ion-input>
       </ion-item>
       <ion-item *ngIf='birthDateInput.invalid && birthDateInput.dirty' no-lines>
         <p ion-text color='danger'>birthDate is required.</p>
@@ -64,8 +66,7 @@
       <!-- City -->
       <ion-item>
         <ion-label floating>City</ion-label>
-        <ion-input type='text' name='city'
-                   #cityInput='ngModel' [(ngModel)]='registerRequest.city' required></ion-input>
+        <ion-input type='text' name='city' #cityInput='ngModel' [(ngModel)]='registerRequest.city' required></ion-input>
       </ion-item>
       <ion-item *ngIf='cityInput.invalid && cityInput.dirty' no-lines>
         <p ion-text color='danger'>City is required.</p>
@@ -73,26 +74,27 @@
       <!-- Gender input -->
       <ion-item>
         <ion-label floating>Gender</ion-label>
-        <ion-select name='gender' #genderInput='ngModel' [(ngModel)]='registerRequest.gender' required>
-          <ion-option value="female">Female</ion-option>
-          <ion-option value="male">Male</ion-option>
-          <ion-option value="other">Other</ion-option>
+        <ion-select name='gender' class="selector" #genderInput='ngModel' [(ngModel)]='registerRequest.gender' required>
+          <ion-option class="option" value="female">Female</ion-option>
+          <ion-option class="option" value="male">Male</ion-option>
+          <ion-option class="option" value="other">Other</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
+    <div class="row">
+      <div padding>
+        <!-- Registration link -->
+        <button class="col back" ion-button block [navPush]="loginPage">Back to Login</button>
+      </div>
+      <div padding>
 
-    <div padding>
+        <!-- Submit button -->
+        <button type='submit' class="col signUp" [disabled]='form.invalid' ion-button block>Sign Up</button>
 
-      <!-- Submit button -->
-      <button type='submit' [disabled]='form.invalid' ion-button block>Sign Up</button>
+        <!-- Error message displayed if the login failed -->
+        <p *ngIf='registerError' ion-text color='danger'>A field is invalid : {{backendMessage}}</p>
 
-      <!-- Error message displayed if the login failed -->
-      <p *ngIf='registerError' ion-text color='danger'>A field is invalid : {{backendMessage}}</p>
-
-    </div>
-    <div padding>
-      <!-- Registration link -->
-      <button ion-button block [navPush]="loginPage">Back to Login</button>
+      </div>
     </div>
   </form>
 

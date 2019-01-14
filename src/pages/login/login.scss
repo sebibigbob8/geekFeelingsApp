@@ -14,18 +14,23 @@ page-login {
 .col {
     background-color: #2DB1FF;
     padding: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
+
     border-radius: 10%;
 }
 
+.button-md {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 540;
+}
+
 #login {
-    padding-left: 2.7em;
-    padding-right: 2.7em;
+    margin-left: 1.6em;
 }
 
 #register {
-    margin-left: 2em;
+    margin-left: -0.5em;
+    padding-left: 2.9em;
+    padding-right: 2.9em;
 }
 
 .LR {
@@ -33,7 +38,6 @@ page-login {
     bottom: 0;
     width: 90%;
     padding: 2em;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /**.scroll-content, .item{
