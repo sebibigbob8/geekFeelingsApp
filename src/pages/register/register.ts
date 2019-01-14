@@ -48,6 +48,7 @@ export class RegisterPage {
     if (this.form.invalid) {
       return;
     }
+    
     // Hide any previous login error.
     this.registerError = false;
     this.backendMessage = "";
