@@ -14,6 +14,7 @@ export class RdvMapPage {
   mapOptions: MapOptions;
   mapMarkers: Marker[];
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider, private geolocation: Geolocation) {
     const tileLayerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const tileLayerOptions = {maxZoom: 18};
@@ -24,7 +25,6 @@ export class RdvMapPage {
       zoom: 13,
       center: latLng(46.778186, 6.641524)
     };
-    //this.mapMarkers = [marker([46.778186,6.641524])];
   }
 
   ionViewDidLoad() {
@@ -32,7 +32,7 @@ export class RdvMapPage {
     geolocationPromise.then(position => {
       const coords = position.coords;
       console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-      this.mapMarkers = [marker([coords.longitude,coords.latitude]).bindTooltip("Im here")];
+      //this.mapMarkers = [marker([coords.longitude, coords.latitude]).bindTooltip("Im here")];
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
