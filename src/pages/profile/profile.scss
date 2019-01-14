@@ -22,7 +22,16 @@ page-profile {
     color: black; 
 }
 
+.saveDiv {
+    padding-top: 2em;
+}
+
 textarea {
-    height: 200px;
+    height: 140px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.box {
+    border-bottom: 0.1px solid grey;
 }
 
