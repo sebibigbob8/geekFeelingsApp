@@ -9,6 +9,7 @@ import {ProfileRequest} from "../../models/profile-request";
 import {QimgImage} from "../../models/QimgImage";
 import {PictureProvider} from "../../providers/picture/picture";
 import {config} from "../../app/config";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 
 /**
  * Generated class for the ProfilePage page.
@@ -37,8 +38,7 @@ export class ProfilePage {
       http.get(`${config.apiUrl}/users/${this.username}?username=true`, this.global.httpHeader).subscribe(response => {
         this.profileRequest.tag = response['tag'];
       }, error => console.warn(error));
-      http.get(`${config.apiUrl}/users/${this.username}/picture?username=true`,this.global.httpHeader).subscribe(response =>
-      {
+      http.get(`${config.apiUrl}/users/${this.username}/picture?username=true`, this.global.httpHeader).subscribe(response => {
         this.pictures = response;
       });
     });

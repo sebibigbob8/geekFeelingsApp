@@ -22,6 +22,8 @@ import {TagInputModule} from "ngx-chips";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PictureProvider} from '../providers/picture/picture';
 import {Camera} from "@ionic-native/camera";
+import { Geolocation } from '@ionic-native/geolocation';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import {Camera} from "@ionic-native/camera";
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),
     TagInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LeafletModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,6 +67,7 @@ import {Camera} from "@ionic-native/camera";
     GlobalProvider,
     PictureProvider,
     Camera,
+    Geolocation,
     AuthInterceptorProvider,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true}
 
