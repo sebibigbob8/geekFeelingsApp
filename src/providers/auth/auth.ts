@@ -43,8 +43,8 @@ export class AuthProvider {
 
   logIn(authRequest: AuthRequest): Observable<User> {
 
-    //delayWhen = Retarde la suite
-    const authUrl = `${config.apiUrl}/auth`;
+    //delayWhen = Retarde la suitegit
+    const authUrl = `${config.apiUrl}/login`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       delayWhen(auth => {
         return this.saveAuth(auth);

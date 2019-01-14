@@ -36,7 +36,6 @@ export class LoginPage {
    */
   @ViewChild(NgForm)
   form: NgForm;
-  storage: any;
 
   constructor(private auth: AuthProvider, public registerEvent: Events, private storage: Storage) {
     this.authRequest = new AuthRequest();
