@@ -1,5 +1,5 @@
-<ion-tabs>
-  <ion-tab *ngFor='let tab of tabs' class="tab"
-           [tabTitle]='tab.title' [tabIcon]='tab.icon' [root]='tab.component' color="white" padding>
+<ion-tabs class="tabi" tabsPlacement="top">
+  <ion-tab *ngFor='let tab of tabs'
+            [tabIcon]='tab.icon' [root]='tab.component'>
   </ion-tab>
 </ion-tabs>
