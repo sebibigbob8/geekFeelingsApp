@@ -1,3 +1,38 @@
 page-register {
 
 }
+
+.selector {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    letter-spacing: 0.1px;
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center;
+    text-align: center;
+  }
+
+.alert-wrapper {
+    border-radius: 7%!important;
+    background-color: #fbfcff!important;
+}
+
+.signUp, .back {
+    padding-left: 4.7em;
+    padding-right: 4.7em;
+}
+
+.toolbar-background-md {
+    background-color: rgb(43, 161, 230);
+}
+
+.back-button-icon {
+    color: #ffffff;
+}
+
+.toolbar-title {
+    color: #ffffff;
+}
+
+
