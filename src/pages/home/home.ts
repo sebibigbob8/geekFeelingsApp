@@ -6,7 +6,6 @@ import {ProfilePage} from "../profile/profile";
 
 
 export interface HomePageTab {
-  title: string;
   icon: string;
   component: Function;
 }

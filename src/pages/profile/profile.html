@@ -3,28 +3,32 @@
 
 
 <ion-content padding>
-  <div name="picturesDiv">
+  <div name="picturesDiv" class="row">
     <ul>
-      <li *ngFor="let picture of pictures">
+      <li *ngFor="let picture of pictures" class="col">
         <span>src :{{picture.src}}</span>
       </li>
     </ul>
-    <button ion-button (click)='takePicture()'>Take a Picture</button>
     <img *ngIf='picture' src='picture.url' />
   </div>
-  <div name="myInformations">
+  <button class="addButton" ion-button (click)='takePicture()'>
+    <ion-icon class="addIcon" name='add'></ion-icon>
+  </button>
+
+  <div name="myInformations" padding class="item-divider">
     <form (submit)='onSubmit($event)'>
       <ion-item>
-        <ion-label floating>Description</ion-label>
+        <ion-label class="item-stacked-label" floating-top>Description</ion-label>
         <ion-input [(ngModel)]='profileRequest.description' type='text' name='description'></ion-input>
       </ion-item>
       <ion-label floating>Interests</ion-label>
       <ion-item>
         <tag-input name="tag" [(ngModel)]='profileRequest.tag' [editable]='true' (onTagEdited)="onTagEdited($event)"></tag-input>
       </ion-item>
-      <button type='submit' [disabled]='form.invalid' ion-button block>Save</button>
+      <button type='submit' class="saveButton" [disabled]='form.invalid' ion-button block>Save</button>
     </form>
   </div>
+
   <ion-buttons end>
     <button ion-button icon-only (click)='logOut()'>
       <ion-icon name='log-out'></ion-icon>
