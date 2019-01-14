@@ -5,6 +5,7 @@ import {RegisterRequest} from "../../models/register-request";
 import {NgForm} from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
+import {config} from "../../app/config";
 
 /**
  * Generated class for the RegisterPage page.
@@ -37,7 +38,7 @@ export class RegisterPage {
   constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController, public registerEvent: Events) {
 
     this.registerRequest = new RegisterRequest;
-    this.unique = false;
+    this.unique = true;
   }
 
   async onSubmit($event) {
@@ -45,14 +46,14 @@ export class RegisterPage {
     $event.preventDefault();
 
     // Do not do anything if the form is invalid.
-    if (this.form.invalid) {
+    if (this.form.invalid || !this.unique) {
       return;
     }
     
     // Hide any previous login error.
     this.registerError = false;
     this.backendMessage = "";
-    let url = this.global.urlAPI + "/users";
+    let url = config.apiUrl + "/users";
 
     await this.http.post(url, this.registerRequest, this.global.httpHeader).subscribe(user => {
       this.registerEvent.publish('registration', true);
@@ -72,19 +73,21 @@ export class RegisterPage {
    * Detect if the username is unique as soon as the user enter the name
    * @param username
    */
+  //TODO: debug
   async isUnique(username) {
     if(username === "")
     {
       this.unique = true;
       return;
     }
-    let url = this.global.urlAPI + "/users/unique/" + username;
+    let url = `${config.apiUrl}/users/unique/${username}`;
     await this.http.get(url, this.global.httpHeader).subscribe(response => {
       // @ts-ignore
       this.unique = response.Result;
-
+      if(!this.unique)
+        this.form.controls['username'].setErrors({'incorrect': true});
     },err =>{
-      console.log(err);
+      console.error(err);
     })
   }
 }

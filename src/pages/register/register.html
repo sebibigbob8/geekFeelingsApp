@@ -20,7 +20,8 @@
       <!-- Name input PS: Do not use 'name' for propriety name cause of bugs -->
       <ion-item>
         <ion-label floating>First Name</ion-label>
-        <ion-input type='text' name='firstName' #firstNameInput='ngModel' [(ngModel)]='registerRequest.name' required></ion-input>
+        <ion-input type='text' name='firstName' #firstNameInput='ngModel' [(ngModel)]='registerRequest.name'
+                   required></ion-input>
       </ion-item>
       <!-- Error message displayed if the name is invalid -->
       <ion-item *ngIf='firstNameInput.invalid && firstNameInput.dirty' no-lines>
@@ -31,13 +32,15 @@
        -->
       <ion-item>
         <ion-label floating>Username</ion-label>
+
         <ion-input (change)="isUnique(usernameInput.value)" type='text' name='username' #usernameInput='ngModel'
-          [(ngModel)]='registerRequest.username' required minlength="6"></ion-input>
+                   [(ngModel)]='registerRequest.username' required minlength="6"></ion-input>
+
       </ion-item>
       <ion-item *ngIf='usernameInput.invalid && usernameInput.dirty' no-lines>
-        <p ion-text color='danger'>Username must be valid</p>
+        <p ion-text color='danger'>Username must be valid : minlength = 6</p>
       </ion-item>
-      <ion-item *ngIf='!unique && usernameInput.dirty' no-lines>
+      <ion-item *ngIf='!unique' no-lines>
         <p ion-text color='danger'>Username already exist.</p>
       </ion-item>
 
@@ -45,7 +48,7 @@
       <ion-item>
         <ion-label floating>Password</ion-label>
         <ion-input type='password' name='password' #passwordInput='ngModel' [(ngModel)]='registerRequest.password'
-          required minlength="6"></ion-input>
+                   required minlength="6"></ion-input>
       </ion-item>
       <ion-item *ngIf='passwordInput.invalid && passwordInput.dirty' no-lines>
         <p ion-text color='danger'>Password is required.</p>
@@ -55,7 +58,7 @@
       <ion-item>
         <ion-label floating>Birthdate</ion-label>
         <ion-input type='date' name='birthDate' #birthDateInput='ngModel' [(ngModel)]='registerRequest.dateBirth'
-          required></ion-input>
+                   required></ion-input>
       </ion-item>
       <ion-item *ngIf='birthDateInput.invalid && birthDateInput.dirty' no-lines>
         <p ion-text color='danger'>birthDate is required.</p>
