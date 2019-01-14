@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
 import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
-import {latLng, MapOptions, tileLayer, marker, Marker,} from 'leaflet';
+import {latLng, MapOptions, tileLayer, marker, Marker, Map} from 'leaflet';
 
 @Component({
   selector: 'page-rdv-map',
@@ -13,7 +13,7 @@ import {latLng, MapOptions, tileLayer, marker, Marker,} from 'leaflet';
 export class RdvMapPage {
   mapOptions: MapOptions;
   mapMarkers: Marker[];
-
+  map: Map;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider, private geolocation: Geolocation) {
     const tileLayerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -32,9 +32,17 @@ export class RdvMapPage {
     geolocationPromise.then(position => {
       const coords = position.coords;
       console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-      //this.mapMarkers = [marker([coords.longitude, coords.latitude]).bindTooltip("Im here")];
+      this.mapMarkers = [marker([coords.latitude, coords.longitude]).bindTooltip("Im here")];
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
+    });
+  }
+
+  onMapReady(map: Map) {
+    this.map = map;
+    this.map.on('moveend', () => {
+      const center = this.map.getCenter();
+      console.log(`Map moved to ${center.lng}, ${center.lat}`);
     });
   }
 
