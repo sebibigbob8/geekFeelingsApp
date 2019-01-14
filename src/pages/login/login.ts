@@ -36,7 +36,7 @@ export class LoginPage {
   @ViewChild(NgForm)
   form: NgForm;
 
-  constructor(private auth: AuthProvider, public registerEvent: Events) {
+  constructor(private storage: Storage, private auth: AuthProvider, public registerEvent: Events) {
     this.authRequest = new AuthRequest();
     this.comeFromRegister = "hidden";
     this.registerEvent.subscribe('registration', data => {

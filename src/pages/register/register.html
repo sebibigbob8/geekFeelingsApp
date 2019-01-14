@@ -53,6 +53,7 @@
 
       <!-- Date of birth input -->
       <ion-item>
+        <ion-label floating>Birthdate</ion-label>
         <ion-input type='date' name='birthDate' #birthDateInput='ngModel' [(ngModel)]='registerRequest.dateBirth'
           required></ion-input>
       </ion-item>
@@ -78,15 +79,15 @@
         </ion-select>
       </ion-item>
     </ion-list>
-    <div class="row">
+    <div class="row buttonRegister">
       <div padding>
         <!-- Registration link -->
-        <button class="col back" ion-button block [navPush]="loginPage">Back to Login</button>
+        <button class="col back" ion-button round block [navPush]="loginPage">Back to Login</button>
       </div>
       <div padding>
 
         <!-- Submit button -->
-        <button type='submit' class="col signUp" [disabled]='form.invalid' ion-button block>Sign Up</button>
+        <button type='submit' class="col signUp" [disabled]='form.invalid' ion-button round block>Sign Up</button>
 
         <!-- Error message displayed if the login failed -->
         <p *ngIf='registerError' ion-text color='danger'>A field is invalid : {{backendMessage}}</p>

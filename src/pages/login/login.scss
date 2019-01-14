@@ -14,8 +14,6 @@ page-login {
 .col {
     background-color: #2DB1FF;
     padding: 25px;
-
-    border-radius: 10%;
 }
 
 .button-md {
@@ -24,24 +22,23 @@ page-login {
 }
 
 #login {
-    margin-left: 1.6em;
+    margin-left: 2em;
 }
 
 #register {
-    margin-left: -0.5em;
-    padding-left: 2.9em;
-    padding-right: 2.9em;
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
 .LR {
     position: absolute;
-    bottom: 0;
+    padding-top: 4em;
+    padding-left: 2em;
     width: 90%;
-    padding: 2em;
 }
 
-/**.scroll-content, .item{
-    background-color:rgb(0, 0, 0);
-}*/
+.formLog {
+    padding-top: 2em;
+}
 
 

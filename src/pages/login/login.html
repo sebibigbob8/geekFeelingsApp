@@ -13,7 +13,7 @@
       <img class="logo" src="assets/imgs/pixel_1.png">
     </a>
   </div>
-  <form (submit)='onSubmit($event)'>
+  <form class="formLog" (submit)='onSubmit($event)'>
     <ion-list class="item item-divider">
 
       <!-- Name input -->
@@ -42,12 +42,12 @@
     <div class="LR item item-divider row">
       <div>
         <!-- Registration link -->
-        <button id="register" class="col" ion-button [navPush]="registerPage">Register</button>
+        <button id="register" class="col" [navPush]="registerPage" ion-button round>Register</button>
       </div>
       <div padding-bottom>
 
         <!-- Submit button -->
-        <button id="login" class="col" type='submit' [disabled]='form.invalid' ion-button>Log in</button>
+        <button id="login" class="col" type='submit' [disabled]='form.invalid' ion-button round>Log in</button>
 
         <!-- Error message displayed if the login failed -->
         <p *ngIf='loginError' ion-text color='danger'>Name or password is invalid.</p>
