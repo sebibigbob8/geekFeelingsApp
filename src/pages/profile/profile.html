@@ -1,37 +1,37 @@
 <ion-header>
-</ion-header>
-
-
-<ion-content padding>
-  <div name="picturesDiv" class="row">
-    <ul>
-      <li *ngFor="let picture of pictures" class="col">
-        <span>src :{{picture.src}}</span>
-      </li>
-    </ul>
-    <img *ngIf='picture' src='picture.url' />
-  </div>
-  <button class="addButton" ion-button (click)='takePicture()'>
-    <ion-icon class="addIcon" name='add'></ion-icon>
-  </button>
-
-  <div name="myInformations" padding class="item-divider">
-    <form (submit)='onSubmit($event)'>
-      <ion-item>
-        <ion-label class="item-stacked-label" floating-top>Description</ion-label>
-        <ion-input [(ngModel)]='profileRequest.description' type='text' name='description'></ion-input>
-      </ion-item>
-      <ion-label floating>Interests</ion-label>
-      <ion-item>
-        <tag-input name="tag" [(ngModel)]='profileRequest.tag' [editable]='true' (onTagEdited)="onTagEdited($event)"></tag-input>
-      </ion-item>
-      <button type='submit' class="saveButton" [disabled]='form.invalid' ion-button block>Save</button>
-    </form>
-  </div>
-
-  <ion-buttons end>
-    <button ion-button icon-only (click)='logOut()'>
-      <ion-icon name='log-out'></ion-icon>
+  </ion-header>
+  
+  
+  <ion-content>
+    <div name="picturesDiv" class="row">
+      <ul>
+        <li *ngFor="let picture of pictures" class="col">
+          <span>src :{{picture.src}}</span>
+        </li>
+      </ul>
+      <img *ngIf='picture' src='picture.url' />
+    </div>
+    <button class="addButton" ion-button (click)='takePicture()'>
+      <ion-icon class="addIcon" name='add'></ion-icon>
     </button>
-  </ion-buttons>
-</ion-content>
+  
+    <div name="myInformations" class="item-divider" padding top>
+      <form (submit)='onSubmit($event)'>
+        <ion-item>
+          <ion-label floating-top>Description</ion-label>
+          <ion-textarea [(ngModel)]='profileRequest.description' type='text' name='description'></ion-textarea>
+        </ion-item>
+        <ion-label floating>Interests</ion-label>
+        <ion-item>
+          <tag-input name="tag" [(ngModel)]='profileRequest.tag' [editable]='true' (onTagEdited)="onTagEdited($event)"></tag-input>
+        </ion-item>
+        <button type='submit' class="saveButton" [disabled]='form.invalid' ion-button block>Save</button>
+      </form>
+    </div>
+  
+    <ion-buttons end>
+      <button ion-button icon-only (click)='logOut()'>
+        <ion-icon name='log-out'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-content>
