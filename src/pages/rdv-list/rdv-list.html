@@ -14,5 +14,107 @@
 
 
 <ion-content padding>
-  RDV list
+  Create RDV
+
+  <form  (submit)='onSubmit($event)'>
+    <ion-list>
+
+      <!-- Title input -->
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type='text' name='title'
+                   #titleInput='ngModel' [(ngModel)]='createrdv.purposeTitle' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the username is invalid -->
+      <ion-item *ngIf='titleInput.invalid && titleInput.dirty' no-lines>
+        <p ion-text color='danger'>Title is required.</p>
+      </ion-item>
+
+
+      <!-- Description input -->
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input type='text' name='descrition'
+                   #descriptionInput='ngModel' [(ngModel)]='createrdv.descrition' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the description is invalid -->
+      <ion-item *ngIf='descriptionInput.invalid && descriptionInput.dirty' no-lines>
+        <p ion-text color='danger'>Description is required.</p>
+      </ion-item>
+
+      <!-- City input -->
+      <ion-item>
+        <ion-label floating>City</ion-label>
+        <ion-input type='text' name='city'
+                   #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the city is invalid -->
+      <ion-item *ngIf='cityInput.invalid && cityInput.dirty' no-lines>
+        <p ion-text color='danger'>City is required.</p>
+      </ion-item>
+
+      <!-- NPA input -->
+      <ion-item>
+        <ion-label floating>NPA</ion-label>
+        <ion-input type='Number' name='NPA'
+                   #NPAInput='ngModel' [(ngModel)]='createrdv.NPA' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the NPA is invalid -->
+      <ion-item *ngIf='NPAInput.invalid && NPAInput.dirty' no-lines>
+        <p ion-text color='danger'>NPA is required.</p>
+      </ion-item>
+
+      <!-- Street input -->
+      <ion-item>
+        <ion-label floating>Street</ion-label>
+        <ion-input type='text' name='street'
+                   #streetInput='ngModel' [(ngModel)]='createrdv.street' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the Street is invalid -->
+      <ion-item *ngIf='streetInput.invalid && streetInput.dirty' no-lines>
+        <p ion-text color='danger'>Street is required.</p>
+      </ion-item>
+
+      <!-- Street number input -->
+      <ion-item>
+        <ion-label floating>Street number</ion-label>
+        <ion-input type='Number' name='city'
+                   #streetNumberInput='ngModel' [(ngModel)]='createrdv.streetNumber' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the street number is invalid -->
+      <ion-item *ngIf='streetNumberInput.invalid && streetNumberInput.dirty' no-lines>
+        <p ion-text color='danger'>Street number is required.</p>
+      </ion-item>
+
+      <!-- Category input -->
+      <ion-item>
+        <ion-label floating>Category</ion-label>
+        <ion-input type='text' name='category'
+                   #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the category is invalid -->
+      <ion-item *ngIf='categoryInput.invalid && categoryInput.dirty' no-lines>
+        <p ion-text color='danger'>Category is required.</p>
+      </ion-item>
+
+    </ion-list>
+    <div padding>
+
+      <!-- Submit button -->
+      <button type='submit' [disabled]='form.invalid' ion-button block>Soumettre</button>
+
+      <!-- Error message displayed if the login failed -->
+      <p *ngIf='createRdvError' ion-text color='danger'>You might have done something wrong, please check your inputs.</p>
+
+    </div>
+
+
+  </form>
 </ion-content>
