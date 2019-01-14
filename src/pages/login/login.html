@@ -39,19 +39,19 @@
       </ion-item>
 
     </ion-list>
-    <div class="LR item item-divider row">
+    <div class="LR row">
+        <div padding-bottom>
+
+            <!-- Submit button -->
+            <button id="login" class="col" type='submit' [disabled]='form.invalid' ion-button round>Log in</button>
+    
+            <!-- Error message displayed if the login failed -->
+            <p *ngIf='loginError' ion-text color='danger'>Name or password is invalid.</p>
+    
+          </div>
       <div>
         <!-- Registration link -->
         <button id="register" class="col" [navPush]="registerPage" ion-button round>Register</button>
-      </div>
-      <div padding-bottom>
-
-        <!-- Submit button -->
-        <button id="login" class="col" type='submit' [disabled]='form.invalid' ion-button round>Log in</button>
-
-        <!-- Error message displayed if the login failed -->
-        <p *ngIf='loginError' ion-text color='danger'>Name or password is invalid.</p>
-
       </div>
     </div>
   </form>

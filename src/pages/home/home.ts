@@ -21,7 +21,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
     this.tabs = [
-      { title: 'Profile', icon: 'add', component: ProfilePage },
+      { title: 'Profile', icon: 'person', component: ProfilePage },
       { title: 'RDV Map', icon: 'map', component: RdvMapPage },
       { title: 'My RDV', icon: 'list', component: RdvListPage }
     ];
