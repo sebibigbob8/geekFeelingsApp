@@ -25,7 +25,6 @@
     "@angular/router": "^7.1.3",
     "@asymmetrik/ngx-leaflet": "^5.0.1",
     "@ionic-native/camera": "^4.19.0",
-    "@ionic-native/calendar": "^4.19.0",
     "@ionic-native/core": "~4.17.0",
     "@ionic-native/date-picker": "^4.18.0",
     "@ionic-native/geolocation": "^4.19.0",
@@ -64,5 +63,4 @@
   "config": {
     "ionic_copy": "copy.config.js"
   }
-
 }
