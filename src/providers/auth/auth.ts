@@ -7,7 +7,7 @@ import { User } from '../../models/user';
 import {GlobalProvider} from "../global/global";
 import { delayWhen, map } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
-import {config} from "../../app/config";
+import { config } from '../../app/config';
 
 /**
  * Authentication service for login/logout.
@@ -44,7 +44,7 @@ export class AuthProvider {
   logIn(authRequest: AuthRequest): Observable<User> {
 
     //delayWhen = Retarde la suite
-    const authUrl = config.apiUrl+'/login';
+    const authUrl = `${config.apiUrl}/auth`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       delayWhen(auth => {
         return this.saveAuth(auth);

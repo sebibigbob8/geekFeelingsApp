@@ -5,11 +5,10 @@
 <ion-content>
   <div name="picturesDiv" class="row">
     <ul>
-      <li *ngFor="let picture of pictures" class="col">
-        <span>src :{{picture.src}}</span>
+      <li *ngFor="let picture of pictures">
+        <img [src]="picture.src">
       </li>
     </ul>
-    <img *ngIf='picture' src='picture.url' />
   </div>
   <button class="addButton" ion-button (click)='takePicture()'>
     <ion-icon class="addIcon" name='add'></ion-icon>
@@ -17,9 +16,12 @@
 
   <div name="myInformations" class="item-divider" padding-top>
     <form (submit)='onSubmit($event)'>
-      <ion-item class="box">
-        <span>Description</span>
-        <ion-textarea [(ngModel)]='profileRequest.description' placeholder="Tell us about yourself" type='text' name='description'></ion-textarea>
+      <button ion-button (click)='takePicture()'>Take a Picture</button>
+      <img *ngIf='picture' [src]='picture.url' />
+      <ion-input [(ngModel)]='pictureRequest.description' type='text' name='descriptionPic'></ion-input>
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input [(ngModel)]='profileRequest.description' type='text' name='description'></ion-input>
       </ion-item>
       <ion-label floating>Interests</ion-label>
       <ion-item class="box" padding-bot>
