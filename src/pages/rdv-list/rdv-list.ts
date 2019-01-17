@@ -5,12 +5,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProvider } from '../../providers/global/global';
-<<<<<<< HEAD
 import { config } from '../../app/config';
-=======
-import { RegisterRequest } from '../../models/register-request';
-import {config} from "../../app/config";
->>>>>>> 642f995c923c730d636faeb92e3a993609c1a919
+import { User } from '../../models/user';
 
 /**
  * Generated class for the RdvListPage page.
@@ -26,10 +22,6 @@ import {config} from "../../app/config";
 export class RdvListPage {
 
 
-
-
-
-
   /**
   * If true, it means that one of the inputs doesn't fit the restrictions
   */
@@ -37,18 +29,41 @@ export class RdvListPage {
 
   @ViewChild(NgForm)
     form: NgForm;
+    auth: any;
     createrdv: CreateRDV;
-  auth: any;
+    user: User;
+
+
 
   constructor(private http: HttpClient,public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public registerEvent: Events) {
 
   this.createrdv= new CreateRDV();
+  this.user= new User();
+
+
+  const url = `${config.apiUrl}/rdvs`;
+  this.http.get(url, this.global.httpHeader).subscribe(rdv => {
+
+//On fait le tour du tableau de rdv. Si le currentUserID == rdv.creator, alors on l'affiche.
+if(rdv.creator==this.user.id ){
+  this.createrdv = rdv;
+}
+  console.log("Voici la liste de rdvs");
+  console.log(rdv);
+  console.log(rdv[20].creator);
+  console.log(this.user.id);
+  }, err => {
+    console.error(
+      `Backend returned code ${err.status}, ` +
+      `body was: ${err.error}`);
+  });
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RdvListPage');
   }
+
 
 /**
    * Called when the create-rdv form is submitted.
@@ -61,15 +76,9 @@ export class RdvListPage {
     if (this.form.invalid) {
       return;
     }
-<<<<<<< HEAD
 
     const url = `${config.apiUrl}/rdvs`;
     //let url = this.global.urlAPI + "/rdvs";
-=======
-    const url = `${config.apiUrl}/rdvs`;
-    //let url = this.global.urlAPI + "/rdvs";
-
->>>>>>> 642f995c923c730d636faeb92e3a993609c1a919
     // Hide any previous create rdv error.
 
 

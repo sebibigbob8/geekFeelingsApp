@@ -15,11 +15,13 @@
 
 <ion-content padding>
   Here is the list of some rdv
-
-
-  <ul>
-    <li *ngFor="rdvList"></li>
-  </ul>
+  <div name="rdvDiv">
+      <span>My RDV</span>
+      <ul *ngIf='rdv'>
+        <li *ngFor="let rdv of rdvs">
+        </li>
+      </ul>
+    </div>
 
 
 </ion-content>

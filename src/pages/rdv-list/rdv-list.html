@@ -14,6 +14,15 @@
 
 
 <ion-content padding>
+
+    Here is the list of some rdv
+    <div name="rdvDiv">
+        <span>My RDVs</span>
+        <ul *ngIf='rdv'>
+          <li *ngFor="let rdv of rdvs">
+          </li>
+        </ul>
+      </div>
   <form  (submit)='onSubmit($event)'>
     <ion-list>
 
