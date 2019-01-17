@@ -61,7 +61,7 @@ export class LoginPage {
     }
     // Hide any previous login error.
     this.loginError = false;
-    this.storage.set('username',this.authRequest.username);
+    this.storage.set('username', this.authRequest.username);
     this.auth.logIn(this.authRequest).subscribe(undefined, err => {
       this.loginError = true;
       console.warn(`Authentication failed: ${err.message}`);

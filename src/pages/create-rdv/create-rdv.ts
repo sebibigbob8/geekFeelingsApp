@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { RdvListPage } from '../rdv-list/rdv-list';
+import { CreateRDV } from '../../models/create-rdv';
+import { Component, } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 /**
@@ -10,7 +12,9 @@ import { AuthProvider } from '../../providers/auth/auth';
 
 @Component({
   selector: 'page-create-rdv',
-  templateUrl: 'create-rdv.html',
+  templateUrl: 'create-rdv.html'
+
+
 })
 export class CreateRdvPage {
 

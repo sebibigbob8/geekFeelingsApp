@@ -9,9 +9,13 @@
 
 
 <ion-content padding>
+<<<<<<< HEAD
   <h6 padding-top>Create RDV</h6>
 
   <form (submit)='onSubmit($event)'>
+=======
+  <form  (submit)='onSubmit($event)'>
+>>>>>>> a84f4293f3725066c5c47ffa8cd5840399c8bc85
     <ion-list>
 
       <!-- Title input -->
@@ -29,8 +33,13 @@
       <!-- Description input -->
       <ion-item>
         <ion-label floating>Description</ion-label>
+<<<<<<< HEAD
         <ion-input type='text' name='descrition' #descriptionInput='ngModel' [(ngModel)]='createrdv.descrition'
           required></ion-input>
+=======
+        <ion-input type='text' name='descrition'
+                   #descriptionInput='ngModel' [(ngModel)]='createrdv.description' required></ion-input>
+>>>>>>> a84f4293f3725066c5c47ffa8cd5840399c8bc85
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -52,7 +61,12 @@
       <!-- NPA input -->
       <ion-item>
         <ion-label floating>NPA</ion-label>
+<<<<<<< HEAD
         <ion-input type='Number' name='NPA' #NPAInput='ngModel' [(ngModel)]='createrdv.NPA' required></ion-input>
+=======
+        <ion-input type='Number' name='NPA'
+                   #NPAInput='ngModel' [(ngModel)]='createrdv.npa' required></ion-input>
+>>>>>>> a84f4293f3725066c5c47ffa8cd5840399c8bc85
       </ion-item>
 
       <!-- Error message displayed if the NPA is invalid -->
@@ -82,6 +96,18 @@
         <p ion-text color='danger'>Street number is required.</p>
       </ion-item>
 
+      <!-- Date input -->
+      <ion-item>
+        <ion-label floating>Date</ion-label>
+        <ion-input type='Date' name='date'
+                   #dateInput='ngModel' [(ngModel)]='createrdv.date' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the date is invalid -->
+      <ion-item *ngIf='dateInput.invalid && dateInput.dirty' no-lines>
+        <p ion-text color='danger'>Street number is required.</p>
+      </ion-item>
+
       <!-- Category input -->
       <ion-item>
         <ion-label floating>Category</ion-label>
@@ -101,9 +127,6 @@
 
       <!-- Error message displayed if the login failed -->
       <p *ngIf='createRdvError' ion-text color='danger'>You might have done something wrong, please check your inputs.</p>
-
     </div>
-
-
   </form>
 </ion-content>
