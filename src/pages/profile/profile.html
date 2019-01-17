@@ -14,7 +14,7 @@
 <ion-content padding>
   <div name="picturesDiv">
     <span>My pictures</span>
-    <ul>
+    <ul *ngIf='picture'>
       <li *ngFor="let picture of pictures">
         <img [src]="picture.src">
       </li>
