@@ -35,6 +35,7 @@ export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private http: HttpClient, public global: GlobalProvider, private storage: Storage, private pictureService: PictureProvider) {
     this.profileRequest = new ProfileRequest();
+    this.pictureRequest = new PictureRequest();
     storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
       http.get(`${config.apiUrl}/users/${this.username}?username=true`, this.global.httpHeader).subscribe(response => {

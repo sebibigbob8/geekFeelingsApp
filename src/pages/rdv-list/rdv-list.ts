@@ -5,8 +5,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProvider } from '../../providers/global/global';
-import { config } from '../../app/config';
 import { RegisterRequest } from '../../models/register-request';
+import { config } from '../../app/config';
 
 /**
  * Generated class for the RdvListPage page.

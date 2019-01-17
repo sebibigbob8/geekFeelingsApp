@@ -5,15 +5,18 @@ import {GlobalProvider} from "../../providers/global/global";
 import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
 import {latLng, MapOptions, tileLayer, marker, Marker, Map} from 'leaflet';
+import { RdvListPage } from '../rdv-list/rdv-list';
 
 @Component({
   selector: 'page-rdv-map',
   templateUrl: 'rdv-map.html',
 })
+
 export class RdvMapPage {
   mapOptions: MapOptions;
   mapMarkers: Marker[];
   map: Map;
+  rdvList = RdvListPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider, private geolocation: Geolocation) {
     const tileLayerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -45,5 +48,4 @@ export class RdvMapPage {
       console.log(`Map moved to ${center.lng}, ${center.lat}`);
     });
   }
-
 }
