@@ -70,8 +70,7 @@ export class ProfilePage {
     });
     //Picture
     if (typeof this.picture != 'undefined') {
-      //TODO: Pourquoi est il possible en postman mais pas avec l'app ? Le but est de faire une simple requete, pourtant une 500 est lancée. Bug dans laffichage des photos aussi
-      let url = `${config.apiUrl}/pictures`;
+            let url = `${config.apiUrl}/pictures`;
       console.log("My request picture: " + Object.keys(this.picture));
       this.pictureRequest.src = this.picture.url;
       this.pictureRequest.description = this.picture.createdAt;
