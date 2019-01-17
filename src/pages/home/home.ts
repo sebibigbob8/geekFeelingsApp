@@ -6,7 +6,6 @@ import {ProfilePage} from "../profile/profile";
 
 
 export interface HomePageTab {
-  title: string;
   icon: string;
   component: Function;
 }
@@ -21,9 +20,9 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
     this.tabs = [
-      { title: 'Profile', icon: 'add', component: ProfilePage },
-      { title: 'RDV Map', icon: 'map', component: RdvMapPage },
-      { title: 'My RDV', icon: 'list', component: RdvListPage }
+      { icon: 'settings', component: ProfilePage },
+      { icon: 'map', component: RdvMapPage },
+      { icon: 'list', component: RdvListPage }
     ];
   }
 

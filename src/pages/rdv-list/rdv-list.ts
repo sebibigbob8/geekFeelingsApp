@@ -5,7 +5,12 @@ import { NavController, NavParams } from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProvider } from '../../providers/global/global';
+<<<<<<< HEAD
 import { config } from '../../app/config';
+=======
+import { RegisterRequest } from '../../models/register-request';
+import {config} from "../../app/config";
+>>>>>>> 642f995c923c730d636faeb92e3a993609c1a919
 
 /**
  * Generated class for the RdvListPage page.
@@ -56,9 +61,15 @@ export class RdvListPage {
     if (this.form.invalid) {
       return;
     }
+<<<<<<< HEAD
 
     const url = `${config.apiUrl}/rdvs`;
     //let url = this.global.urlAPI + "/rdvs";
+=======
+    const url = `${config.apiUrl}/rdvs`;
+    //let url = this.global.urlAPI + "/rdvs";
+
+>>>>>>> 642f995c923c730d636faeb92e3a993609c1a919
     // Hide any previous create rdv error.
 
 
