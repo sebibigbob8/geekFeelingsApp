@@ -14,8 +14,6 @@
 
 
 <ion-content padding>
-  Create RDV
-
   <form  (submit)='onSubmit($event)'>
     <ion-list>
 
@@ -36,7 +34,7 @@
       <ion-item>
         <ion-label floating>Description</ion-label>
         <ion-input type='text' name='descrition'
-                   #descriptionInput='ngModel' [(ngModel)]='createrdv.descrition' required></ion-input>
+                   #descriptionInput='ngModel' [(ngModel)]='createrdv.description' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -60,7 +58,7 @@
       <ion-item>
         <ion-label floating>NPA</ion-label>
         <ion-input type='Number' name='NPA'
-                   #NPAInput='ngModel' [(ngModel)]='createrdv.NPA' required></ion-input>
+                   #NPAInput='ngModel' [(ngModel)]='createrdv.npa' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the NPA is invalid -->
@@ -92,6 +90,18 @@
         <p ion-text color='danger'>Street number is required.</p>
       </ion-item>
 
+      <!-- Date input -->
+      <ion-item>
+        <ion-label floating>Date</ion-label>
+        <ion-input type='Date' name='date'
+                   #dateInput='ngModel' [(ngModel)]='createrdv.date' required></ion-input>
+      </ion-item>
+
+      <!-- Error message displayed if the date is invalid -->
+      <ion-item *ngIf='dateInput.invalid && dateInput.dirty' no-lines>
+        <p ion-text color='danger'>Street number is required.</p>
+      </ion-item>
+
       <!-- Category input -->
       <ion-item>
         <ion-label floating>Category</ion-label>
@@ -112,9 +122,6 @@
 
       <!-- Error message displayed if the login failed -->
       <p *ngIf='createRdvError' ion-text color='danger'>You might have done something wrong, please check your inputs.</p>
-
     </div>
-
-
   </form>
 </ion-content>

@@ -7,19 +7,19 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Profile</ion-title>
-
-    <!-- Logout button -->
-    <ion-buttons end>
-      <button ion-button icon-only (click)='logOut()'>
-        <ion-icon name='log-out'></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title>RDVList</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  Create RDV
+  Here is the list of some rdv
+
+
+  <ul>
+    <li *ngFor="rdvList"></li>
+  </ul>
+
+
 </ion-content>
