@@ -5,25 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>RdvList</ion-title>
-  </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  Create RDV
+  <h6 padding-top>Create RDV</h6>
 
-  <form  (submit)='onSubmit($event)'>
+  <form (submit)='onSubmit($event)'>
     <ion-list>
 
       <!-- Title input -->
       <ion-item>
         <ion-label floating>Title</ion-label>
-        <ion-input type='text' name='title'
-                   #titleInput='ngModel' [(ngModel)]='createrdv.purposeTitle' required></ion-input>
+        <ion-input type='text' name='title' #titleInput='ngModel' [(ngModel)]='createrdv.purposeTitle' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the username is invalid -->
@@ -35,8 +29,8 @@
       <!-- Description input -->
       <ion-item>
         <ion-label floating>Description</ion-label>
-        <ion-input type='text' name='descrition'
-                   #descriptionInput='ngModel' [(ngModel)]='createrdv.descrition' required></ion-input>
+        <ion-input type='text' name='descrition' #descriptionInput='ngModel' [(ngModel)]='createrdv.descrition'
+          required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -47,8 +41,7 @@
       <!-- City input -->
       <ion-item>
         <ion-label floating>City</ion-label>
-        <ion-input type='text' name='city'
-                   #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
+        <ion-input type='text' name='city' #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the city is invalid -->
@@ -59,8 +52,7 @@
       <!-- NPA input -->
       <ion-item>
         <ion-label floating>NPA</ion-label>
-        <ion-input type='Number' name='NPA'
-                   #NPAInput='ngModel' [(ngModel)]='createrdv.NPA' required></ion-input>
+        <ion-input type='Number' name='NPA' #NPAInput='ngModel' [(ngModel)]='createrdv.NPA' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the NPA is invalid -->
@@ -71,8 +63,7 @@
       <!-- Street input -->
       <ion-item>
         <ion-label floating>Street</ion-label>
-        <ion-input type='text' name='street'
-                   #streetInput='ngModel' [(ngModel)]='createrdv.street' required></ion-input>
+        <ion-input type='text' name='street' #streetInput='ngModel' [(ngModel)]='createrdv.street' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the Street is invalid -->
@@ -83,8 +74,7 @@
       <!-- Street number input -->
       <ion-item>
         <ion-label floating>Street number</ion-label>
-        <ion-input type='Number' name='city'
-                   #streetNumberInput='ngModel' [(ngModel)]='createrdv.streetNumber' required></ion-input>
+        <ion-input type='Number' name='city' #streetNumberInput='ngModel' [(ngModel)]='createrdv.streetNumber' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the street number is invalid -->
@@ -95,8 +85,7 @@
       <!-- Category input -->
       <ion-item>
         <ion-label floating>Category</ion-label>
-        <ion-input type='text' name='category'
-                   #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
+        <ion-input type='text' name='category' #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the category is invalid -->

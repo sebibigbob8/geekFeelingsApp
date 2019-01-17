@@ -16,7 +16,6 @@ export class RdvMapPage {
   mapOptions: MapOptions;
   mapMarkers: Marker[];
   map: Map;
-  rdvList = RdvListPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider, private geolocation: Geolocation) {
     const tileLayerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -29,7 +28,7 @@ export class RdvMapPage {
       center: latLng(46.778186, 6.641524)
     };
   }
-
+  
   ionViewDidLoad() {
     const geolocationPromise = this.geolocation.getCurrentPosition();
     geolocationPromise.then(position => {
@@ -47,5 +46,9 @@ export class RdvMapPage {
       const center = this.map.getCenter();
       console.log(`Map moved to ${center.lng}, ${center.lat}`);
     });
+  }
+  
+  goToRdvList() {
+    this.navCtrl.push(RdvListPage);
   }
 }
