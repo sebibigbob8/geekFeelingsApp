@@ -10,6 +10,7 @@ import {QimgImage} from "../../models/QimgImage";
 import {PictureProvider} from "../../providers/picture/picture";
 import {config} from "../../app/config";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import {PictureRequest} from "../../models/picture-request";
 
 /**
  * Generated class for the ProfilePage page.
@@ -27,6 +28,7 @@ export class ProfilePage {
   @ViewChild(NgForm)
   form: NgForm;
   profileRequest: ProfileRequest;
+  pictureRequest: PictureRequest;
   username = "";
   picture: QimgImage;
   pictures;
@@ -61,6 +63,18 @@ export class ProfilePage {
         `body was: ${err.error}`);
       console.warn("with this request : " + this.profileRequest.tag + "-" + this.profileRequest.description);
     });
+    if(typeof this.picture != 'undefined')
+    {
+      let url = `${config.apiUrl}/pictures`;
+      this.http.post(url, this.pictureRequest, this.global.httpHeader).subscribe(user => {
+      console.log(user);
+    }, err => {
+      console.error(
+        `Backend returned code ${err.status}, ` +
+        `body was: ${err.error}`);
+      console.warn("with this request : " + this.profileRequest.tag + "-" + this.profileRequest.description);
+    });
+    }
   }
 
   takePicture() {
@@ -70,7 +84,6 @@ export class ProfilePage {
       console.warn('Could not take picture', err);
     });
   }
-
   logOut() {
     this.auth.logOut();
   }

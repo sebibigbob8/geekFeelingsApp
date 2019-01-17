@@ -16,14 +16,15 @@
     <span>My pictures</span>
     <ul>
       <li *ngFor="let picture of pictures">
-        <span>src :{{picture.src}}</span>
+        <img [src]="picture.src">
       </li>
     </ul>
-    <button ion-button (click)='takePicture()'>Take a Picture</button>
-    <img *ngIf='picture' src='picture.url' />
   </div>
   <div name="myInformations">
     <form (submit)='onSubmit($event)'>
+      <button ion-button (click)='takePicture()'>Take a Picture</button>
+      <img *ngIf='picture' [src]='picture.url' />
+      <ion-input [(ngModel)]='pictureRequest.description' type='text' name='descriptionPic'></ion-input>
       <ion-item>
         <ion-label floating>Description</ion-label>
         <ion-input [(ngModel)]='profileRequest.description' type='text' name='description'></ion-input>

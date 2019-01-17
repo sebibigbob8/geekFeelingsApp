@@ -66,9 +66,6 @@ export class RdvListPage {
     this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {
       console.log(rdv);
         }, err =>{
-          //console.log(rdv);
-      console.log("123456789")
-      //console.log(this.auth.getuser());
           console.error(err);})
 
       }
