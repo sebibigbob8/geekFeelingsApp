@@ -47,6 +47,7 @@ export class AuthProvider {
     const authUrl = `${config.apiUrl}/login`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       delayWhen(auth => {
+        console.log("auth")
         return this.saveAuth(auth);
       }),
       map(auth => {

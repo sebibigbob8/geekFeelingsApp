@@ -5,7 +5,7 @@
 <ion-content padding>
   <div name="picturesDiv">
     <span>My pictures</span>
-    <ul *ngIf='picture'>
+    <ul *ngIf='pictures'>
       <li *ngFor="let picture of pictures">
         <img [src]="picture.src">
       </li>
@@ -14,12 +14,11 @@
   <button class="addButton" ion-button (click)='takePicture()'>
     <ion-icon class="addIcon" name='add'></ion-icon>
   </button>
-
+  <button ion-button (click)='takePicture()'>Take a Picture</button>
   <div name="myInformations" class="item-divider" padding-top>
     <form (submit)='onSubmit($event)'>
-      <button ion-button (click)='takePicture()'>Take a Picture</button>
       <img *ngIf='picture' [src]='picture.url' />
-      <ion-input [(ngModel)]='pictureRequest.description' type='text' name='descriptionPic'></ion-input>
+      <ion-input *ngIf='picture' [(ngModel)]='pictureRequest.description' type='text' name='descriptionPic'>My picture</ion-input>
       <ion-item>
         <ion-label floating>Description</ion-label>
         <ion-input [(ngModel)]='profileRequest.description' type='text' name='description'></ion-input>
@@ -28,10 +27,8 @@
       <ion-item class="box" padding-bot>
         <tag-input name="tag" [(ngModel)]='profileRequest.tag' [editable]='true' (onTagEdited)="onTagEdited($event)"></tag-input>
       </ion-item>
+      <button type='submit' class="saveButton" ion-button block>Save</button>
     </form>
-    <div class="saveDiv">
-      <button type='submit' class="saveButton" [disabled]='form.invalid' ion-button block>Save</button>
-    </div>
   </div>
 
   <ion-buttons end>
