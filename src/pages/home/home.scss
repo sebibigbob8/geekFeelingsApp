@@ -1,3 +1,15 @@
 page-home {
 
 }
+
+.tabs-md, .tabbar {
+    background-color: #ffffff!important;
+}
+
+.tab-button-icon {
+    font-size: 3rem!important;
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon {
+    color: #2DB1FF;
+}
