@@ -6,6 +6,7 @@ import {AuthProvider} from '../../providers/auth/auth';
 import {RegisterPage} from '../register/register';
 import {Storage} from "@ionic/storage";
 
+
 /**
  * Login page.
  *
@@ -35,6 +36,7 @@ export class LoginPage {
    */
   @ViewChild(NgForm)
   form: NgForm;
+  storage: any;
 
   constructor(private auth: AuthProvider, public registerEvent: Events, private storage: Storage) {
     this.authRequest = new AuthRequest();
