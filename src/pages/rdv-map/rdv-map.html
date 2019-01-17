@@ -11,6 +11,6 @@
 </ion-content>
 <ion-footer>
   <div>
-    <button class="saveButton addRDV" (click)="goToRdvList()" ion-button block>Add a rendez-vous</button>
+    <button class="saveButton addRDV" [navPush]="registerPage" ion-button block>Add a rendez-vous</button>
   </div>
 </ion-footer>

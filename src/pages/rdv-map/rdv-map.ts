@@ -16,6 +16,7 @@ export class RdvMapPage {
   mapOptions: MapOptions;
   mapMarkers: Marker[];
   map: Map;
+  rdvListPage = RdvListPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider, private geolocation: Geolocation) {
     const tileLayerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -48,7 +49,8 @@ export class RdvMapPage {
     });
   }
   
+  /*
   goToRdvList() {
     this.navCtrl.push(RdvListPage);
-  }
+  }*/
 }
