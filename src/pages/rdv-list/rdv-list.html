@@ -54,40 +54,16 @@
         <p ion-text color='danger'>City is required.</p>
       </ion-item>
 
-      <!-- NPA input -->
+      <!-- location -->
       <ion-item>
-        <ion-label floating>NPA</ion-label>
-        <ion-input type='Number' name='NPA'
-                   #NPAInput='ngModel' [(ngModel)]='createrdv.npa' required></ion-input>
+        <ion-label floating>Location</ion-label>
+        <ion-input type='text' name='city'
+                   #locationInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
       </ion-item>
 
-      <!-- Error message displayed if the NPA is invalid -->
-      <ion-item *ngIf='NPAInput.invalid && NPAInput.dirty' no-lines>
-        <p ion-text color='danger'>NPA is required.</p>
-      </ion-item>
-
-      <!-- Street input -->
-      <ion-item>
-        <ion-label floating>Street</ion-label>
-        <ion-input type='text' name='street'
-                   #streetInput='ngModel' [(ngModel)]='createrdv.street' required></ion-input>
-      </ion-item>
-
-      <!-- Error message displayed if the Street is invalid -->
-      <ion-item *ngIf='streetInput.invalid && streetInput.dirty' no-lines>
-        <p ion-text color='danger'>Street is required.</p>
-      </ion-item>
-
-      <!-- Street number input -->
-      <ion-item>
-        <ion-label floating>Street number</ion-label>
-        <ion-input type='Number' name='city'
-                   #streetNumberInput='ngModel' [(ngModel)]='createrdv.streetNumber' required></ion-input>
-      </ion-item>
-
-      <!-- Error message displayed if the street number is invalid -->
-      <ion-item *ngIf='streetNumberInput.invalid && streetNumberInput.dirty' no-lines>
-        <p ion-text color='danger'>Street number is required.</p>
+      <!-- Error message displayed if the city is invalid -->
+      <ion-item *ngIf='locationInput.invalid && locationInput.dirty' no-lines>
+        <p ion-text color='danger'>Location is required.</p>
       </ion-item>
 
       <!-- Date input -->
@@ -99,7 +75,7 @@
 
       <!-- Error message displayed if the date is invalid -->
       <ion-item *ngIf='dateInput.invalid && dateInput.dirty' no-lines>
-        <p ion-text color='danger'>Street number is required.</p>
+        <p ion-text color='danger'>Date is required.</p>
       </ion-item>
 
       <!-- Category input -->
@@ -118,7 +94,7 @@
     <div padding>
 
       <!-- Submit button -->
-      <button type='submit' [disabled]='form.invalid' ion-button block>Soumettre</button>
+      <button type='submit' [disabled]='form.invalid' ion-button block>Submit</button>
 
       <!-- Error message displayed if the login failed -->
       <p *ngIf='createRdvError' ion-text color='danger'>You might have done something wrong, please check your inputs.</p>
