@@ -46,7 +46,6 @@ export class ProfilePage {
       }, error => console.warn(error));
       http.get(`${config.apiUrl}/users/${this.username}/picture?username=true`, this.global.httpHeader).subscribe(response => {
         this.pictures = response;
-        console.log(this.pictures);
       });
     });
   }

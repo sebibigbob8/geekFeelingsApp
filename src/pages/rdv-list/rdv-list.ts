@@ -51,7 +51,6 @@ export class RdvListPage {
     }
     this.http.get(`${config.apiUrl}/address/${this.createrdv.city}+${this.createrdv.location}`, this.global.httpHeader).subscribe(location => {
       console.log("Reponse google Map", location);
-      console.log(location[0].latitude);
       this.createrdv.lat = location[0].latitude;
       this.createrdv.long = location[0].longitude;
       this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {

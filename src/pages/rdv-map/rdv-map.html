@@ -10,5 +10,5 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div class='map' leaflet [leafletOptions]='mapOptions' [leafletLayers]='mapMarkers' (leafletMapReady)='onMapReady($event)'></div>
+  <div class='map' leaflet [leafletOptions]='mapOptions' [leafletLayers]='userMarker' (leafletMapReady)='onMapReady($event)'></div>
 </ion-content>
