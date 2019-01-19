@@ -75,23 +75,20 @@ export class RdvMapPage {
     for (let key of Object.keys(rdvs)) {
       if (typeof rdvs[key].lat != 'undefined' && typeof rdvs[key].long != 'undefined') {
         marker([rdvs[key].lat, rdvs[key].long], {icon: icon}).bindPopup(rdvs[key].description).addTo(this.map);
-        this.myRdvs.push(rdvs[key]);
       }
     }
   }
-
 }
 
+//TODO @AKaufi : Icon styling
 var otherRdvIcon = icon({
   iconUrl: './assets/imgs/marker.png',
-
   iconSize: [38, 95], // size of the icon
   iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
   popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var myRdvIcon = icon({
   iconUrl: './assets/imgs/place-localizer.png',
-
   iconSize: [38, 95], // size of the icon
   iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
   popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
