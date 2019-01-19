@@ -8,6 +8,7 @@ import {HomePage} from '../pages/home/home';
 import {RdvListPage} from "../pages/rdv-list/rdv-list";
 import {RdvMapPage} from "../pages/rdv-map/rdv-map";
 import {CreateRdvPage} from "../pages/create-rdv/create-rdv";
+import {ModifyRdvPage} from "../pages/modify-rdv/modify-rdv";
 import {AuthProvider} from '../providers/auth/auth';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginPage} from "../pages/login/login";
@@ -34,7 +35,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     RdvMapPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    ModifyRdvPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     RdvMapPage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    ModifyRdvPage
   ],
   providers: [
     StatusBar,

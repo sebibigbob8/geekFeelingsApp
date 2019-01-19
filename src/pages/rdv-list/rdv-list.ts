@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalProvider } from '../../providers/global/global';
 import { config } from '../../app/config';
 import { User } from '../../models/user';
+import {Storage} from "@ionic/storage";
+import {ModifyRdvPage} from "../modify-rdv/modify-rdv";
 
 /**
  * Generated class for the RdvListPage page.
@@ -32,31 +34,26 @@ export class RdvListPage {
     auth: any;
     createrdv: CreateRDV;
     user: User;
+    username = "";
+    rdvs: Object;
+    rdvToModify: Object;
+    rdv: Object;
 
 
 
-  constructor(private http: HttpClient,public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public registerEvent: Events) {
+  constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController,
+              private storage: Storage, public navParams: NavParams,
+              public registerEvent: Events) {
 
-  this.createrdv= new CreateRDV();
-  this.user= new User();
+    this.createrdv = new CreateRDV();
 
-
-  const url = `${config.apiUrl}/rdvs`;
-  this.http.get(url, this.global.httpHeader).subscribe(rdv => {
-
-//On fait le tour du tableau de rdv. Si le currentUserID == rdv.creator, alors on l'affiche.
-if(rdv.creator==this.user.id ){
-  this.createrdv = rdv;
-}
-  console.log("Voici la liste de rdvs");
-  console.log(rdv);
-  console.log(rdv[20].creator);
-  console.log(this.user.id);
-  }, err => {
-    console.error(
-      `Backend returned code ${err.status}, ` +
-      `body was: ${err.error}`);
-  });
+    storage.get('username').then((usernameGet) => {
+      this.username = usernameGet;
+      http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(response => {
+        console.log(response);
+        this.rdvs = response;
+      }, error => console.warn(error));
+    });
 
   }
 
@@ -64,6 +61,9 @@ if(rdv.creator==this.user.id ){
     console.log('ionViewDidLoad RdvListPage');
   }
 
+  modifyRdv(rdv){
+    this.rdvToModify = rdv;
+  }
 
 /**
    * Called when the create-rdv form is submitted.
