@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
 import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
-import {latLng, MapOptions, tileLayer, marker, Marker, Map} from 'leaflet';
+import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon} from 'leaflet';
 import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
 
@@ -41,6 +41,7 @@ export class RdvMapPage {
       const center = this.map.getCenter();
       console.log(`Map moved to ${center.lng}, ${center.lat}`);
     });
+    //Get the user's location
     const geolocationPromise = this.geolocation.getCurrentPosition();
     geolocationPromise.then(position => {
       const coords = position.coords;
@@ -50,22 +51,49 @@ export class RdvMapPage {
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
-
+    //Draw markers about the currently loged in User RDVS
     this.storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
       this.http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(rdvs => {
-        for(let key of Object.keys(rdvs))
-        {
-          if(typeof rdvs[key].lat != 'undefined' && typeof rdvs[key].long != 'undefined')
-          {
-            marker([rdvs[key].lat,rdvs[key].long]).bindPopup(rdvs[key].description).addTo(map);
-          }
-
-          this.myRdvs.push(rdvs[key]);
-        }
-        //TODO: Add mutliple marker at once leaflet !
+        this.putRdvOnMap(rdvs,myRdvIcon);
       });
     }).catch(err => console.warn(err))
+    //Draw the others RDVS
+    this.http.get(`${config.apiUrl}/rdvs?notmine=true`, this.global.httpHeader).subscribe(rdvs => {
+      this.putRdvOnMap(rdvs, otherRdvIcon);
 
+    }, err => {
+      console.error(err);
+    });
   }
+
+  /**
+   * Draw markers of rdvs on map
+   * @param rdvs
+   */
+  putRdvOnMap(rdvs, icon) {
+    for (let key of Object.keys(rdvs)) {
+      if (typeof rdvs[key].lat != 'undefined' && typeof rdvs[key].long != 'undefined') {
+        marker([rdvs[key].lat, rdvs[key].long], {icon: icon}).bindPopup(rdvs[key].description).addTo(this.map);
+        this.myRdvs.push(rdvs[key]);
+      }
+    }
+  }
+
 }
+
+var otherRdvIcon = icon({
+  iconUrl: './assets/imgs/marker.png',
+
+  iconSize: [38, 95], // size of the icon
+  iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+  popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+var myRdvIcon = icon({
+  iconUrl: './assets/imgs/place-localizer.png',
+
+  iconSize: [38, 95], // size of the icon
+  iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+  popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
