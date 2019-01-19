@@ -54,12 +54,17 @@ export class RdvMapPage {
     this.storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
       this.http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(rdvs => {
-        //Todo : Pourquoi le retour 'rdvs' est compris comme une string ? Alors que (typeof rdvs = Object). Voir verdon
-      });
+        for(let key of Object.keys(rdvs))
+        {
+          if(typeof rdvs[key].lat != 'undefined' && typeof rdvs[key].long != 'undefined')
+          {
+            marker([rdvs[key].lat,rdvs[key].long]).bindPopup(rdvs[key].description).addTo(map);
+          }
 
-      this.http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(response => {
-        console.log(response);
-      }, error => console.warn(error));
+          this.myRdvs.push(rdvs[key]);
+        }
+        //TODO: Add mutliple marker at once leaflet !
+      });
     }).catch(err => console.warn(err))
 
   }
