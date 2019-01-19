@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
 import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
-import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon} from 'leaflet';
+import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon, popup} from 'leaflet';
 import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
 
@@ -55,7 +55,7 @@ export class RdvMapPage {
     this.storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
       this.http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(rdvs => {
-        this.putRdvOnMap(rdvs,myRdvIcon);
+        this.putRdvOnMap(rdvs, myRdvIcon);
       });
     }).catch(err => console.warn(err))
     //Draw the others RDVS
@@ -74,13 +74,23 @@ export class RdvMapPage {
   putRdvOnMap(rdvs, icon) {
     for (let key of Object.keys(rdvs)) {
       if (typeof rdvs[key].lat != 'undefined' && typeof rdvs[key].long != 'undefined') {
-        marker([rdvs[key].lat, rdvs[key].long], {icon: icon}).bindPopup(rdvs[key].description).addTo(this.map);
+        marker([rdvs[key].lat, rdvs[key].long], {icon: icon}).bindPopup(this.createMyPopup(rdvs[key].purposeTitle, rdvs[key].guest)).addTo(this.map);
       }
     }
   }
+
+  //TODO: How to insert a forms in leaflet Popup and fire events from there
+  createMyPopup(text, guests) {
+    let test = false;
+    return `<h2>${text}</h2><br><button type="submit" (click)="test = false" >Sign Up</button><h2 *ngIf="test = true">CHEHH</h2><br />`;
+  }
+
+  putMeON() {
+    console.log("TARACE");
+  }
 }
 
-//TODO @AKaufi : Icon styling
+//TODO @AKaufi : styling
 var otherRdvIcon = icon({
   iconUrl: './assets/imgs/marker.png',
   iconSize: [38, 95], // size of the icon

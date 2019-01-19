@@ -7,6 +7,6 @@ export class CreateRDV {
   long: string;
   lat: string;
   category: string;
-  guest: string;
+  guest: Array<string>;
   location: string;
 }
