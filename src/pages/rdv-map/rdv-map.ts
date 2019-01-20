@@ -7,6 +7,7 @@ import {Geolocation} from '@ionic-native/geolocation';
 import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon, popup, DomUtil, DomEvent} from 'leaflet';
 import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
+import {createScope} from "@angular/core/src/profile/wtf_impl";
 
 @Component({
   selector: 'page-rdv-map',
@@ -19,6 +20,7 @@ export class RdvMapPage {
   username = "";
   myRdvs;
   currentPopup;
+  theTrue;
   markers;
   otherRdvs: CreateRDV[];
 
@@ -34,11 +36,12 @@ export class RdvMapPage {
     };
     this.myRdvs = new Array();
     this.currentPopup = {
-      titre: "",
+      titre: "EHHHHHH",
       date: new Date(),
       Description: ""
     }
     this.markers = {};
+    this.theTrue = false;
   }
 
   onMapReady(map: Map) {
@@ -87,15 +90,19 @@ export class RdvMapPage {
       let rdv = rdvs[key];
       if (typeof rdv.lat === 'undefined' || typeof rdv.long === 'undefined')
         continue;
-      this.myRdvs.push({titre:rdv.purposeTitle,date:rdv.date,description:rdv.description});
-      this.markers[this.myRdvs.length] = marker([rdv.lat, rdv.long], {icon: icon}).bindPopup(template).addTo(this.map).on('click',(e)=>{
-        let currentMarker = e.target;
-        for(let key of Object.keys(this.markers))
-        {
-          if(this.markers[key]._leaflet_id === currentMarker._leaflet_id)
-            console.log(this.myRdvs[parseInt(key)-1]);
+      this.myRdvs.push({titre: rdv.purposeTitle, date: rdv.date, description: rdv.description});
+      this.markers[this.myRdvs.length] = marker([rdv.lat, rdv.long], {icon: icon}).addTo(this.map).on('click', (e) => {
+        let currentRdv;
+        for (let key of Object.keys(this.markers)) {
+          if (this.markers[key]._leaflet_id === e.target._leaflet_id) {
+            currentRdv = this.myRdvs[parseInt(key) - 1];
+            break;
+          }
         }
-      });
+        this.currentPopup.titre = currentRdv.titre;
+        this.theTrue = true;
+        //TODO: How to touch the global scope that Angugu can detect the change and update the HTML
+      }).bindPopup(document.getElementById('popup-form'));
     }
   }
 }
@@ -114,9 +121,4 @@ var myRdvIcon = icon({
   iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
   popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
-var template =
-  '<form id="popup-form">\
-  <label for="eventTitle">{{currentPopup.title}}</label>\
-  <button id="popupSubmit" type="button">Sign Up</button>\
-</form>';
 

@@ -12,3 +12,7 @@
 <ion-content padding>
   <div class='map' leaflet [leafletOptions]='mapOptions' [leafletLayers]='userMarker' (leafletMapReady)='onMapReady($event)'></div>
 </ion-content>
+<form id="popup-form">
+  <label id="titleLabel">{{currentPopup.titre}}</label>
+  <button id="popupSubmit" type="button">Sign Up</button>
+</form>
