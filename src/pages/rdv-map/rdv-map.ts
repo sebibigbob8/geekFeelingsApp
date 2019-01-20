@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
 import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
-import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon, popup} from 'leaflet';
+import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon, popup, DomUtil, DomEvent} from 'leaflet';
 import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
 
@@ -18,6 +18,8 @@ export class RdvMapPage {
   map: Map;
   username = "";
   myRdvs;
+  currentPopup;
+  markers;
   otherRdvs: CreateRDV[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider,
@@ -31,7 +33,12 @@ export class RdvMapPage {
       zoom: 13,
     };
     this.myRdvs = new Array();
-
+    this.currentPopup = {
+      titre: "",
+      date: new Date(),
+      Description: ""
+    }
+    this.markers = {};
   }
 
   onMapReady(map: Map) {
@@ -68,27 +75,31 @@ export class RdvMapPage {
   }
 
   /**
-   * Draw markers of rdvs on map
+   * Draw markers on map
+   * Save datas about events in an array at the same position.
+   * rdvs[x] = markers{x+1}
    * @param rdvs
+   * @param icon
    */
+  //TODO: Send the array in param
   putRdvOnMap(rdvs, icon) {
     for (let key of Object.keys(rdvs)) {
-      if (typeof rdvs[key].lat != 'undefined' && typeof rdvs[key].long != 'undefined') {
-        marker([rdvs[key].lat, rdvs[key].long], {icon: icon}).bindPopup(this.createMyPopup(rdvs[key].purposeTitle, rdvs[key].guest)).addTo(this.map);
-      }
+      let rdv = rdvs[key];
+      if (typeof rdv.lat === 'undefined' || typeof rdv.long === 'undefined')
+        continue;
+      this.myRdvs.push({titre:rdv.purposeTitle,date:rdv.date,description:rdv.description});
+      this.markers[this.myRdvs.length] = marker([rdv.lat, rdv.long], {icon: icon}).bindPopup(template).addTo(this.map).on('click',(e)=>{
+        let currentMarker = e.target;
+        for(let key of Object.keys(this.markers))
+        {
+          if(this.markers[key]._leaflet_id === currentMarker._leaflet_id)
+            console.log(this.myRdvs[parseInt(key)-1]);
+        }
+      });
     }
   }
-
-  //TODO: How to insert a forms in leaflet Popup and fire events from there
-  createMyPopup(text, guests) {
-    let test = false;
-    return `<h2>${text}</h2><br><button type="submit" (click)="test = false" >Sign Up</button><h2 *ngIf="test = true">CHEHH</h2><br />`;
-  }
-
-  putMeON() {
-    console.log("TARACE");
-  }
 }
+
 
 //TODO @AKaufi : styling
 var otherRdvIcon = icon({
@@ -103,4 +114,9 @@ var myRdvIcon = icon({
   iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
   popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
+var template =
+  '<form id="popup-form">\
+  <label for="eventTitle">{{currentPopup.title}}</label>\
+  <button id="popupSubmit" type="button">Sign Up</button>\
+</form>';
 
