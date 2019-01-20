@@ -20,7 +20,8 @@ export class RdvMapPage {
   username = "";
   myRdvs;
   currentPopup;
-  theTrue;
+  myRdvsLoaded;
+  othersRdvsLoaded
   markers;
   otherRdvs: CreateRDV[];
 
@@ -36,12 +37,13 @@ export class RdvMapPage {
     };
     this.myRdvs = new Array();
     this.currentPopup = {
-      titre: "EHHHHHH",
+      title: "",
       date: new Date(),
       Description: ""
     }
     this.markers = {};
-    this.theTrue = false;
+    this.myRdvsLoaded = false;
+    this.othersRdvsLoaded = false;
   }
 
   onMapReady(map: Map) {
@@ -66,11 +68,28 @@ export class RdvMapPage {
       this.username = usernameGet;
       this.http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(rdvs => {
         this.putRdvOnMap(rdvs, myRdvIcon);
+        this.myRdvsLoaded = true;
+        for(let rdv of this.myRdvs)
+        {
+          var form = document.createElement('div');
+          console.log("id",rdv.id);
+          form.innerHTML = `
+                <form id="${rdv.id}" >
+                    <span >${rdv.title}</span>
+                    <span>${rdv.id}</span>
+                    <button type="submit">Sign Up </button>
+                </form>
+            `;
+          document.getElementById("myRdvsForms").appendChild(form);
+          this.markers = this.createmarker(rdv);
+        }
+
       });
     }).catch(err => console.warn(err))
     //Draw the others RDVS
     this.http.get(`${config.apiUrl}/rdvs?notmine=true`, this.global.httpHeader).subscribe(rdvs => {
       this.putRdvOnMap(rdvs, otherRdvIcon);
+      this.othersRdvsLoaded = true;
 
     }, err => {
       console.error(err);
@@ -90,20 +109,13 @@ export class RdvMapPage {
       let rdv = rdvs[key];
       if (typeof rdv.lat === 'undefined' || typeof rdv.long === 'undefined')
         continue;
-      this.myRdvs.push({titre: rdv.purposeTitle, date: rdv.date, description: rdv.description});
-      this.markers[this.myRdvs.length] = marker([rdv.lat, rdv.long], {icon: icon}).addTo(this.map).on('click', (e) => {
-        let currentRdv;
-        for (let key of Object.keys(this.markers)) {
-          if (this.markers[key]._leaflet_id === e.target._leaflet_id) {
-            currentRdv = this.myRdvs[parseInt(key) - 1];
-            break;
-          }
-        }
-        this.currentPopup.titre = currentRdv.titre;
-        this.theTrue = true;
-        //TODO: How to touch the global scope that Angugu can detect the change and update the HTML
-      }).bindPopup(document.getElementById('popup-form'));
+      this.myRdvs.push({id: rdv._id, title: rdv.purposeTitle, date: rdv.date, description: rdv.description, lat:rdv.lat, long: rdv.long});
     }
+  }
+
+  createmarker(LErdv) {
+    let lemarker = marker([LErdv.lat, LErdv.long], {icon: otherRdvIcon}).addTo(this.map).bindPopup(document.getElementById(LErdv.id));
+    return lemarker;
   }
 }
 
