@@ -22,6 +22,7 @@ import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
 import {createScope} from "@angular/core/src/profile/wtf_impl";
 import {DomSanitizer} from "@angular/platform-browser";
+import {RdvListPage} from "../rdv-list/rdv-list";
 
 @Component({
   selector: 'page-rdv-map',
@@ -40,6 +41,7 @@ export class RdvMapPage {
   layerOtherRdvs = new LayerGroup();
   layerGuestRdvs = new LayerGroup();
   filtersControl = {};
+  rdvListePage= RdvListPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider,
               private geolocation: Geolocation, private storage: Storage, private sanitizer: DomSanitizer) {
