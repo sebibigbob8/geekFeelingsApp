@@ -4,7 +4,20 @@ import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
 import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
-import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon, popup, DomUtil, DomEvent} from 'leaflet';
+import {
+  latLng,
+  MapOptions,
+  tileLayer,
+  marker,
+  Marker,
+  Map,
+  icon,
+  popup,
+  DomUtil,
+  DomEvent,
+  LayerGroup,
+  control
+} from 'leaflet';
 import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
 import {createScope} from "@angular/core/src/profile/wtf_impl";
@@ -23,6 +36,10 @@ export class RdvMapPage {
   myRdvs;
   otherRdvs;
   guestRdvs;
+  layerMyRdvs = new LayerGroup();
+  layerOtherRdvs = new LayerGroup();
+  layerGuestRdvs = new LayerGroup();
+  filtersControl = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider,
               private geolocation: Geolocation, private storage: Storage, private sanitizer: DomSanitizer) {
@@ -69,12 +86,13 @@ export class RdvMapPage {
           form.innerHTML = `
                 <form id="${rdv.id}" >
                     <span >${rdv.title}</span>
-                    <span>TODO: guest</span>
                 </form>
             `;
           document.getElementById("myRdvsForms").appendChild(form);
-          this.markers = this.createmarker(rdv, myRdvIcon);
+          this.layerMyRdvs.addLayer(this.createmarker(rdv, myRdvIcon));
         }
+
+        this.filtersControl['Mine'] = this.layerMyRdvs;
       });
     }).catch(err => console.warn(err))
     //Draw the others RDVS------------
@@ -103,8 +121,10 @@ export class RdvMapPage {
             console.error(err);
           })
         });
-        this.markers = this.createmarker(rdv, otherRdvIcon);
+        this.layerOtherRdvs.addLayer(this.createmarker(rdv, otherRdvIcon));
       }
+      this.map.addLayer(this.layerOtherRdvs);
+      this.filtersControl['Others'] = this.layerOtherRdvs;
 
     }, err => {
       console.error(err);
@@ -135,13 +155,16 @@ export class RdvMapPage {
             console.error(err);
           })
         });
-        this.markers = this.createmarker(rdv, guestIcon);
+        //this.markers = this.createmarker(rdv, guestIcon);
+        this.layerGuestRdvs.addLayer(this.createmarker(rdv, guestIcon));
       }
+      this.map.addLayer(this.layerGuestRdvs);
+      this.filtersControl['Guest'] = this.layerGuestRdvs;
+      control.layers(null,this.filtersControl).addTo(this.map);
 
     }, err => {
       console.error(err);
     });
-
   }
 
   /**
@@ -168,8 +191,8 @@ export class RdvMapPage {
   }
 
   createmarker(LErdv, icon) {
-    let lemarker = marker([LErdv.lat, LErdv.long], {icon: icon}).addTo(this.map).bindPopup(document.getElementById(LErdv.id));
-    return lemarker;
+    return marker([LErdv.lat, LErdv.long], {icon: icon}).bindPopup(document.getElementById(LErdv.id));
+
   }
 }
 
