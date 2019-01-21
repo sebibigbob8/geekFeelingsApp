@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Events} from 'ionic-angular';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProvider } from '../../providers/global/global';
@@ -25,8 +25,8 @@ export class RdvListPage {
 
 
   /**
-  * If true, it means that one of the inputs doesn't fit the restrictions
-  */
+   * If true, it means that one of the inputs doesn't fit the restrictions
+   */
   createRdvError: boolean;
 
   @ViewChild(NgForm)
@@ -58,7 +58,7 @@ export class RdvListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RdvListPage');
+
   }
 
   modifyRdv(rdv){
@@ -68,28 +68,33 @@ export class RdvListPage {
 /**
    * Called when the create-rdv form is submitted.
    */
-  async onSubmit($event) {
-
+  onSubmit($event) {
     // Prevent default HTML form behavior.
     $event.preventDefault();
     // Do not do anything if the form is invalid.
     if (this.form.invalid) {
       return;
     }
-
+    this.http.get(`${config.apiUrl}/address/${this.createrdv.city}+${this.createrdv.location}`, this.global.httpHeader).subscribe(location => {
+      console.log("Reponse google Map", location);
+      this.createrdv.lat = location[0].latitude;
+      this.createrdv.long = location[0].longitude;
+      this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {
+        console.log('rdv created', rdv);
+      }, err => {
+        console.error(err);
+        return err;
+      })
+    }, err => {
+      console.error(err);
+      return err;
+    });
     const url = `${config.apiUrl}/rdvs`;
-    //let url = this.global.urlAPI + "/rdvs";
     // Hide any previous create rdv error.
 
+  }
 
-    console.log(url);
-    this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {
-      console.log(rdv);
-        }, err =>{
-          console.error(err);})
-
-      }
-    }
+}
 
 
 

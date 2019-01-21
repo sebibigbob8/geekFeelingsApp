@@ -4,10 +4,9 @@ export class CreateRDV {
   description: string;
   date: Date;
   city: string;
-  npa: string;
-  street: string;
-  streetNumber: Number;
+  long: string;
+  lat: string;
   category: string;
-  guest: string;
-
+  guest: Array<string>;
+  location: string;
 }
