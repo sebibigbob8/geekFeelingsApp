@@ -24,7 +24,7 @@ export class RdvMapPage {
   otherRdvs;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider,
-              private geolocation: Geolocation, private storage: Storage,private sanitizer:DomSanitizer) {
+              private geolocation: Geolocation, private storage: Storage, private sanitizer: DomSanitizer) {
     const tileLayerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const tileLayerOptions = {maxZoom: 18};
     this.mapOptions = {
@@ -89,11 +89,14 @@ export class RdvMapPage {
                 </form>
             `).toString();
         document.getElementById("myRdvsForms").appendChild(form);
-        document.getElementById(rdv.id).addEventListener('click',(theOne)=>{
+        document.getElementById(rdv.id).addEventListener('click', (theOne) => {
           //TODO: The code detect the correct rdv and the correct click. The ID of the event is in theOne
           //1.make the API call to sign up to the event 2. Verification : Already on it ?If yes, how to disable the signUp BTN
-          console.log("Gros click", theOne);
-        })
+          let idRdv = theOne['path'][1].id;
+          this.http.patch(`${config.apiUrl}/rdvs/${idRdv}`, {guest: true}, this.global.httpHeader).subscribe(rdvUpdated => {
+            console.log("The new Rdv :", rdvUpdated);
+          })
+        });
         this.markers = this.createmarker(rdv, otherRdvIcon);
       }
 
@@ -102,7 +105,6 @@ export class RdvMapPage {
     });
 
   }
-
 
   /**
    * Draw markers on map
@@ -130,11 +132,6 @@ export class RdvMapPage {
   createmarker(LErdv, icon) {
     let lemarker = marker([LErdv.lat, LErdv.long], {icon: icon}).addTo(this.map).bindPopup(document.getElementById(LErdv.id));
     return lemarker;
-  }
-
-  onSubmit($event) {
-    $event.preventDefault();
-    console.log("try to submit", $event);
   }
 }
 
