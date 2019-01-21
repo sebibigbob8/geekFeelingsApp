@@ -19,9 +19,10 @@ export class RdvMapPage {
   userMarker: Marker[];
   map: Map;
   username = "";
-  myRdvs;
   markers;
+  myRdvs;
   otherRdvs;
+  guestRdvs;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider,
               private geolocation: Geolocation, private storage: Storage, private sanitizer: DomSanitizer) {
@@ -35,6 +36,7 @@ export class RdvMapPage {
     };
     this.myRdvs = new Array();
     this.otherRdvs = new Array();
+    this.guestRdvs = new Array();
     this.markers = {};
   }
 
@@ -55,7 +57,7 @@ export class RdvMapPage {
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
-    //Draw markers about the currently loged in User RDVS
+    //Draw the user RDVS--------------
     this.storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
       this.http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(rdvs => {
@@ -75,7 +77,7 @@ export class RdvMapPage {
         }
       });
     }).catch(err => console.warn(err))
-    //Draw the others RDVS
+    //Draw the others RDVS------------
     this.http.get(`${config.apiUrl}/rdvs?notmine=true`, this.global.httpHeader).subscribe(rdvs => {
       this.putRdvOnMap(rdvs, this.otherRdvs);
       for (let rdv of this.otherRdvs) {
@@ -90,14 +92,50 @@ export class RdvMapPage {
             `).toString();
         document.getElementById("myRdvsForms").appendChild(form);
         document.getElementById(rdv.id).addEventListener('click', (theOne) => {
-          //TODO: The code detect the correct rdv and the correct click. The ID of the event is in theOne
           //1.make the API call to sign up to the event 2. Verification : Already on it ?If yes, how to disable the signUp BTN
           let idRdv = theOne['path'][1].id;
+
           this.http.patch(`${config.apiUrl}/rdvs/${idRdv}`, {guest: true}, this.global.httpHeader).subscribe(rdvUpdated => {
+            //TODO: Message d'inscription
             console.log("The new Rdv :", rdvUpdated);
+            theOne.target['disabled'] = true;
+          }, err => {
+            console.error(err);
           })
         });
         this.markers = this.createmarker(rdv, otherRdvIcon);
+      }
+
+    }, err => {
+      console.error(err);
+    });
+    //Draw the guests RDVS------------
+    this.http.get(`${config.apiUrl}/rdvs?guest=true`, this.global.httpHeader).subscribe(rdvs => {
+      this.putRdvOnMap(rdvs, this.guestRdvs);
+      for (let rdv of this.guestRdvs) {
+        var form = document.createElement('div');
+        //TODO @AKaufi : styling
+        form.innerHTML = this.sanitizer.bypassSecurityTrustHtml(`
+                <form class="popupForm" id="${rdv.id}" >
+                    <span >${rdv.title}</span>
+                    <span>${rdv.id}</span>
+                    <button type="button">Unsubscribe </button>
+                </form>
+            `).toString();
+        document.getElementById("myRdvsForms").appendChild(form);
+        document.getElementById(rdv.id).addEventListener('click', (theOne) => {
+          //1.make the API call to sign up to the event 2. Verification : Already on it ?If yes, how to disable the signUp BTN
+          let idRdv = theOne['path'][1].id;
+
+          this.http.patch(`${config.apiUrl}/rdvs/${idRdv}`, {guest: false}, this.global.httpHeader).subscribe(rdvUpdated => {
+            //TODO: Message de désinscription
+            console.log("The new Rdv :", rdvUpdated);
+            theOne.target['disabled'] = true;
+          }, err => {
+            console.error(err);
+          })
+        });
+        this.markers = this.createmarker(rdv, guestIcon);
       }
 
     }, err => {
@@ -137,13 +175,19 @@ export class RdvMapPage {
 
 //TODO @AKaufi : styling
 var otherRdvIcon = icon({
-  iconUrl: './assets/imgs/marker.png',
+  iconUrl: './assets/imgs/marker2.png',
   iconSize: [38, 95], // size of the icon
   iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
   popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var myRdvIcon = icon({
   iconUrl: './assets/imgs/place-localizer.png',
+  iconSize: [38, 95], // size of the icon
+  iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+  popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+var guestIcon = icon({
+  iconUrl: './assets/imgs/marker.png',
   iconSize: [38, 95], // size of the icon
   iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
   popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
