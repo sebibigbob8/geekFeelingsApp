@@ -124,6 +124,7 @@ export class RdvMapPage {
             //TODO: Message d'inscription
             console.log("The new Rdv :", rdvUpdated);
             theOne.target['disabled'] = true;
+            this.navCtrl.setRoot(this.navCtrl.getActive().component);
           }, err => {
             console.error(err);
           })
@@ -158,6 +159,7 @@ export class RdvMapPage {
             //TODO: Message de désinscription
             console.log("The new Rdv :", rdvUpdated);
             theOne.target['disabled'] = true;
+            this.navCtrl.setRoot(this.navCtrl.getActive().component);
           }, err => {
             console.error(err);
           })

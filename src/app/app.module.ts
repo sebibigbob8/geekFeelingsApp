@@ -6,7 +6,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
-import { RdvListPage } from "../pages/rdv-list/rdv-list";
+import {RdvListPage} from "../pages/rdv-list/rdv-list";
 import {RdvMapPage} from "../pages/rdv-map/rdv-map";
 import {CreateRdvPage} from "../pages/create-rdv/create-rdv";
 import {ModifyRdvPage} from "../pages/modify-rdv/modify-rdv";

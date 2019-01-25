@@ -23,7 +23,7 @@ import { Subject } from 'rxjs';
   selector: 'page-rdv-list',
   templateUrl: 'rdv-list.html',
 })
-export default class RdvListPage {
+export class RdvListPage {
 
 
   /**
