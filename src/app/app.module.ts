@@ -9,7 +9,6 @@ import {HomePage} from '../pages/home/home';
 import {RdvListPage} from "../pages/rdv-list/rdv-list";
 import {RdvMapPage} from "../pages/rdv-map/rdv-map";
 import {CreateRdvPage} from "../pages/create-rdv/create-rdv";
-import {ModifyRdvPage} from "../pages/modify-rdv/modify-rdv";
 import {AuthProvider} from '../providers/auth/auth';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginPage} from "../pages/login/login";
@@ -26,6 +25,7 @@ import {PictureProvider} from '../providers/picture/picture';
 import {Camera} from "@ionic-native/camera";
 import { Geolocation } from '@ionic-native/geolocation';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import {UpdateRdvPage} from "../pages/update-rdv/update-rdv";
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     LoginPage,
     RegisterPage,
     ProfilePage,
-    ModifyRdvPage
+    UpdateRdvPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +62,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     LoginPage,
     RegisterPage,
     ProfilePage,
-    ModifyRdvPage
+    UpdateRdvPage
   ],
   providers: [
     StatusBar,

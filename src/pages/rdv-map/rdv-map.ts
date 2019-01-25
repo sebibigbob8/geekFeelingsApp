@@ -20,8 +20,6 @@ import {
 import {Storage} from "@ionic/storage";
 import {DomSanitizer} from "@angular/platform-browser";
 import RdvListPage from "../rdv-list/rdv-list";
-
-import {createScope} from "@angular/core/src/profile/wtf_impl";
 import { config } from '../../app/config';
 
 

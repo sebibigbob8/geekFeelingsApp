@@ -10,23 +10,18 @@
 <ion-content>
 
 
-  <!-- Liste of rdv from the user -->
-    <div class="listRDV">
+  <!-- List of rdv from the user -->
+  <div class="listRDV">
+    <a *ngFor="let rdv of rdvs" class="item item-thumbnail-left">
+      <h4>{{rdv.purposeTitle}}</h4>
+      <p>{{rdv.description}}</p>
+      <button ion-button color="light">Open</button>
+      <button ion-button color="light" (click)="goUpdate(rdv)">Modify</button>
+      <button ion-button color="light" (click)="delete(rdv)">Delete</button>
+    </a>
+  </div>
 
-        <a *ngFor="let rdv of rdvs" class="item item-thumbnail-left">
-          <h4>{{rdv.purposeTitle}}</h4>
-          <p>{{rdv.description}}</p>
-          <button ion-button color="light">Open</button>
-          <button ion-button color="light" (click)="modifyRdv(rdv)" [navPush]="modifyRdvPage">Modify</button>
-          <button ion-button color="light" (click)="delete(rdv)">Delete</button>
-        </a>
-    </div>
-<!----------------------------------->
-
-
-
-
-<form (submit)='onSubmit($event)'>
+  <form (submit)='onSubmit($event)'>
     <ion-list>
 
       <!-- Title input -->
@@ -46,7 +41,7 @@
       <ion-item>
         <ion-label floating>Description</ion-label>
         <ion-input type='text' name='descrition' #descriptionInput='ngModel' [(ngModel)]='createrdv.description'
-          required></ion-input>
+                   required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -66,11 +61,11 @@
       </ion-item>
 
 
-
       <!-- Location input -->
       <ion-item>
         <ion-label floating>Location</ion-label>
-        <ion-input type='text' name='location' #locationInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
+        <ion-input type='text' name='location' #locationInput='ngModel' [(ngModel)]='createrdv.location'
+                   required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the city is invalid -->
@@ -93,7 +88,8 @@
       <!-- Category input -->
       <ion-item>
         <ion-label floating>Category</ion-label>
-        <ion-input type='text' name='category' #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
+        <ion-input type='text' name='category' #categoryInput='ngModel' [(ngModel)]='createrdv.category'
+                   required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the category is invalid -->
@@ -108,7 +104,8 @@
       <button type='submit' [disabled]='form.invalid' ion-button block>Submit</button>
 
       <!-- Error message displayed if the login failed -->
-      <p *ngIf='createRdvError' ion-text color='danger'>You might have done something wrong, please check your inputs.</p>
+      <p *ngIf='createRdvError' ion-text color='danger'>You might have done something wrong, please check your
+        inputs.</p>
     </div>
   </form>
 </ion-content>
