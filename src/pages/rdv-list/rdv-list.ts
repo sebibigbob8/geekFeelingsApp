@@ -1,7 +1,7 @@
 import { RdvService } from './../RdvService';
 import { ModifyRdvPage } from './../modify-rdv/modify-rdv';
 import {Component, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {NgForm, FormGroup, FormBuilder} from '@angular/forms';
 import {Events} from 'ionic-angular';
 import {NavController, NavParams} from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
@@ -32,6 +32,7 @@ export class RdvListPage {
   createRdvError: boolean;
   modifyRdvPage = ModifyRdvPage;
   //rdvSubject = new Subject<CreateRDV>();
+  rdvForm: FormGroup;
 
 
 
@@ -42,8 +43,8 @@ export class RdvListPage {
     user: User;
     username = "";
     rdvs: Object;
-    rdvToModify: Object;
-    rdv: Object;
+    rdvToModify: CreateRDV[];
+    rdv: CreateRDV[];
 
 
 
@@ -78,6 +79,8 @@ export class RdvListPage {
         console.log(rdv);
       });
     };
+
+
 
 
 /**

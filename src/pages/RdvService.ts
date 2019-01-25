@@ -9,7 +9,7 @@ export class RdvService {
     this.rdvSubject.next(this.rdvs.slice());
   }
 
-  addUser(rdv: CreateRDV) {
+  addRdv(rdv: CreateRDV) {
     this.rdvs.push(rdv);
     this.emitRdvs();
   }
