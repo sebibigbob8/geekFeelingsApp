@@ -50,3 +50,5 @@ Touch the button modify to manage the rendez-vous. Fill the formular to modify t
 Touch the button delete to delete the rendez-vous.
 
 It's also possible to add a rendez-vous by touching the button add on top of the screen.
+
+![](src/assets/RM/rdv_list.jpg)
