@@ -3,9 +3,12 @@ import {NgForm} from '@angular/forms';
 import {Events} from 'ionic-angular';
 import {NavController, NavParams} from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
-import {HttpClient} from '@angular/common/http';
-import {GlobalProvider} from '../../providers/global/global';
-import {config} from '../../app/config';
+import { HttpClient } from '@angular/common/http';
+import { GlobalProvider } from '../../providers/global/global';
+import { config } from '../../app/config';
+import { User } from '../../models/user';
+import {Storage} from "@ionic/storage";
+import {ModifyRdvPage} from "../modify-rdv/modify-rdv";
 
 /**
  * Generated class for the RdvListPage page.
@@ -27,19 +30,42 @@ export class RdvListPage {
   createRdvError: boolean;
 
   @ViewChild(NgForm)
-  form: NgForm;
-  createrdv: CreateRDV;
-  auth: any;
+    form: NgForm;
+    auth: any;
+    createrdv: CreateRDV;
+    user: User;
+    username = "";
+    rdvs: Object;
+    rdvToModify: Object;
+    rdv: Object;
 
-  constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public registerEvent: Events) {
+
+
+  constructor(private http: HttpClient, public global: GlobalProvider, public navCtrl: NavController,
+              private storage: Storage, public navParams: NavParams,
+              public registerEvent: Events) {
+
     this.createrdv = new CreateRDV();
+
+    storage.get('username').then((usernameGet) => {
+      this.username = usernameGet;
+      http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(response => {
+        console.log(response);
+        this.rdvs = response;
+      }, error => console.warn(error));
+    });
+
   }
 
   ionViewDidLoad() {
 
   }
 
-  /**
+  modifyRdv(rdv){
+    this.rdvToModify = rdv;
+  }
+
+/**
    * Called when the create-rdv form is submitted.
    */
   onSubmit($event) {
