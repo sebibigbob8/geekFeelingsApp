@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
 })
 export class ModifyRdvPage implements OnInit, OnDestroy{
 
+  rdvs : CreateRDV[];
   createrdv: CreateRDV;
   rdvsSubscription: Subscription;
   RdvsListPage: any;
@@ -45,31 +46,28 @@ export class ModifyRdvPage implements OnInit, OnDestroy{
    auth: any;
    user: User;
    username = "";
-   rdvs: Object;
-   rdvToModify: CreateRDV;
+   //rdvs: Object;
+   rdvToModify: CreateRDV[];
    rdv : any;
   rdvListPage: RdvListPage;
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public global: GlobalProvider,
+  constructor(private rdvService: RdvService, public navCtrl: NavController, public navParams: NavParams, public global: GlobalProvider,
               private http: HttpClient, public registerEvent: Events) {
 
                 console.log("Je me construis 2");
-
-                console.log(this.rdvToModify);
   }
 
 
   ngOnInit() {
-    this.rdvsSubscription = this.RdvService.rdvSubject.subscribe(
-      (rdvSelected: CreateRDV) => {
+    this.rdvsSubscription = this.rdvService.rdvSubject.subscribe(
+      (rdvSelected: CreateRDV[]) => {
         this.rdvToModify = rdvSelected;
-        console.log("Je me construis");
         console.log(this.rdvToModify);
       }
     );
-    this.RdvService.emitRdv();
+    this.rdvService.emitRdvs();
   }
 
 

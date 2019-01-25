@@ -1,3 +1,4 @@
+import { RdvService } from './../RdvService';
 import { ModifyRdvPage } from './../modify-rdv/modify-rdv';
 import {Component, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
@@ -30,16 +31,9 @@ export class RdvListPage {
    */
   createRdvError: boolean;
   modifyRdvPage = ModifyRdvPage;
-  rdvSubject = new Subject<CreateRDV>();
+  //rdvSubject = new Subject<CreateRDV>();
 
-  emitRdvs() {
-    this.rdvSubject.next(this.createrdv.slice());
-  }
 
-  addUser(rdv: CreateRDV) {
-    this.createrdv.push(rdv);
-    this.emitRdvs();
-  }
 
   @ViewChild(NgForm)
     form: NgForm;
@@ -74,6 +68,7 @@ export class RdvListPage {
   }
 
   modifyRdv(rdv){
+    console.log("dans la fct modify");
     this.rdvToModify = rdv;
     console.log("Le rendez-vous qu'on récupère dans la fonction modify", this.rdvToModify); //Ca marche
   }
