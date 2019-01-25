@@ -1,5 +1,7 @@
+import { RdvService } from './../RdvService';
+import { ModifyRdvPage } from './../modify-rdv/modify-rdv';
 import {Component, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {NgForm, FormGroup, FormBuilder} from '@angular/forms';
 import {Events} from 'ionic-angular';
 import {NavController, NavParams} from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
@@ -8,7 +10,7 @@ import { GlobalProvider } from '../../providers/global/global';
 import { config } from '../../app/config';
 import { User } from '../../models/user';
 import {Storage} from "@ionic/storage";
-import {ModifyRdvPage} from "../modify-rdv/modify-rdv";
+import { Subject } from 'rxjs';
 
 /**
  * Generated class for the RdvListPage page.
@@ -21,13 +23,17 @@ import {ModifyRdvPage} from "../modify-rdv/modify-rdv";
   selector: 'page-rdv-list',
   templateUrl: 'rdv-list.html',
 })
-export class RdvListPage {
+export default class RdvListPage {
 
 
   /**
    * If true, it means that one of the inputs doesn't fit the restrictions
    */
   createRdvError: boolean;
+  modifyRdvPage = ModifyRdvPage;
+
+
+
 
   @ViewChild(NgForm)
     form: NgForm;
@@ -36,8 +42,8 @@ export class RdvListPage {
     user: User;
     username = "";
     rdvs: Object;
-    rdvToModify: Object;
-    rdv: Object;
+    rdvToModify: CreateRDV[];
+    rdv: CreateRDV[];
 
 
 
@@ -62,8 +68,19 @@ export class RdvListPage {
   }
 
   modifyRdv(rdv){
+    console.log("dans la fct modify");
     this.rdvToModify = rdv;
+    console.log("Le rendez-vous qu'on récupère dans la fonction modify", this.rdvToModify); //Ca marche
   }
+
+  delete(rdv){
+    this.http.delete(`${config.apiUrl}/rdvs/${rdv._id}`).subscribe(deletedRdv =>{
+        console.log(rdv);
+      });
+    };
+
+
+
 
 /**
    * Called when the create-rdv form is submitted.
@@ -81,6 +98,7 @@ export class RdvListPage {
       this.createrdv.long = location[0].longitude;
       this.http.post(url, this.createrdv, this.global.httpHeader).subscribe(rdv => {
         console.log('rdv created', rdv);
+        console.log(rdv);
       }, err => {
         console.error(err);
         return err;

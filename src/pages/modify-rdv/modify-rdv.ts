@@ -1,5 +1,7 @@
+import { RdvService } from './../RdvService';
+import { RdvListPage } from './../rdv-list/rdv-list';
 import { NavController, NavParams } from 'ionic-angular';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Events} from 'ionic-angular';
 import {CreateRDV} from '../../models/create-rdv';
@@ -8,7 +10,8 @@ import { GlobalProvider } from '../../providers/global/global';
 import { config } from '../../app/config';
 import { User } from '../../models/user';
 import {Storage} from "@ionic/storage";
-import {RdvListPage} from "../../pages/rdv-list/rdv-list";
+import { Subscription } from 'rxjs';
+
 
 /**
  * Generated class for the ModifyRdvPage page.
@@ -21,34 +24,57 @@ import {RdvListPage} from "../../pages/rdv-list/rdv-list";
   selector: 'page-modify-rdv',
   templateUrl: 'modify-rdv.html',
 })
-export class ModifyRdvPage {
+export class ModifyRdvPage implements OnInit, OnDestroy{
+
+  rdvs : CreateRDV[];
+  createrdv: CreateRDV;
+  rdvsSubscription: Subscription;
+  RdvsListPage: any;
+  RdvService: any;
+  ngOnDestroy(): void {
+    throw new Error("Method not implemented.");
+  }
 
     /**
   * If true, it means that one of the inputs doesn't fit the restrictions
   */
  createRdvError: boolean;
 
+
  @ViewChild(NgForm)
    form: NgForm;
    auth: any;
-   createrdv: CreateRDV;
    user: User;
    username = "";
-   rdvs: Object;
-   rdvToModify: Object;
-   rdv: Object;
+   //rdvs: Object;
+   rdvToModify: CreateRDV[];
+   rdv : any;
+  rdvListPage: RdvListPage;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public global: GlobalProvider,
+
+  constructor(private rdvService: RdvService, public navCtrl: NavController, public navParams: NavParams, public global: GlobalProvider,
               private http: HttpClient, public registerEvent: Events) {
 
-                console.log("la vie");
-                console.log(this.rdvToModify);
+                console.log("Je me construis 2");
   }
+
+
+  ngOnInit() {
+    this.rdvsSubscription = this.rdvService.rdvSubject.subscribe(
+      (rdvSelected: CreateRDV[]) => {
+        this.rdvToModify = rdvSelected;
+        console.log(this.rdvToModify);
+      }
+    );
+    this.rdvService.emitRdvs();
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModifyRdvPage');
   }
+
 
   async onSubmit($event) {
 

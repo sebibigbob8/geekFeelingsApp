@@ -1,4 +1,11 @@
 export class CreateRDV {
+  push(rdv: CreateRDV): any {
+    throw new Error("Method not implemented.");
+  }
+  slice(): CreateRDV {
+    throw new Error("Method not implemented.");
+  }
+
   creator: string;
   purposeTitle: string;
   description: string;

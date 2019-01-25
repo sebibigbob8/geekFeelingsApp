@@ -35,3 +35,36 @@ textarea {
     border-bottom: 0.1px solid grey;
 }
 
+.logoutDiv {
+    padding-top: 2em;
+    padding-bottom: 1.4em;
+}
+
+.intTitle {
+    padding-top: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: rgb(116, 116, 116);
+}
+
+.pictureDesc {
+    height: 100px;
+}
+
+img {
+    float: left;
+    height: 100px;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 100px;      
+}
+
+li {
+    display: block;
+}
+
+.pictureRow {
+    width: 122%;
+    margin-left: -2.6em;
+}
+

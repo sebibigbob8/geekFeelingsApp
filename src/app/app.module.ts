@@ -1,3 +1,4 @@
+import { RdvService } from './../pages/RdvService';
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
@@ -5,7 +6,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
-import {RdvListPage} from "../pages/rdv-list/rdv-list";
+import { RdvListPage } from "../pages/rdv-list/rdv-list";
 import {RdvMapPage} from "../pages/rdv-map/rdv-map";
 import {CreateRdvPage} from "../pages/create-rdv/create-rdv";
 import {ModifyRdvPage} from "../pages/modify-rdv/modify-rdv";
@@ -48,7 +49,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     IonicStorageModule.forRoot(),
     TagInputModule,
     BrowserAnimationsModule,
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(),
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,7 +74,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     Camera,
     Geolocation,
     AuthInterceptorProvider,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true},
+    RdvService
 
   ]
 })

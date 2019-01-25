@@ -3,36 +3,40 @@
 
 
 <ion-content padding>
-  <div name="picturesDiv">
+  <div class="pictureRow" name="picturesDiv">
     <span>My pictures</span>
     <ul *ngIf='pictures'>
       <li *ngFor="let picture of pictures">
         <img [src]="picture.src">
       </li>
     </ul>
+    <button class="addButton" ion-button (click)='takePicture()'>
+        <ion-icon class="addIcon" name='add'></ion-icon>
+      </button>
   </div>
-  <button class="addButton" ion-button (click)='takePicture()'>
-    <ion-icon class="addIcon" name='add'></ion-icon>
-  </button>
-  <button ion-button (click)='takePicture()'>Take a Picture</button>
   <div name="myInformations" class="item-divider" padding-top>
     <form (submit)='onSubmit($event)'>
-      <img *ngIf='picture' [src]='picture.url' />
-      <ion-input *ngIf='picture' [(ngModel)]='pictureRequest.description' type='text' name='descriptionPic'>My picture</ion-input>
-      <ion-item>
-        <ion-label floating>Description</ion-label>
-        <ion-input [(ngModel)]='profileRequest.description' type='text' name='description'></ion-input>
+          <img class="picture" *ngIf='picture' [src]='picture.url' />
+      <ion-item *ngIf="picture" padding-top>
+        <ion-label floating-top>Add a legend</ion-label>
+        <ion-textarea class="pictureDesc" [(ngModel)]='pictureRequest.description' type='text' name='descriptionPic'></ion-textarea>
       </ion-item>
-      <ion-label floating>Interests</ion-label>
+      <h6 class="intTitle" padding-top>Who are you ?</h6>
+      <ion-item>
+        <ion-textarea [(ngModel)]='profileRequest.description' type='text' name='description'></ion-textarea>
+      </ion-item>
+      <h6 class="intTitle">Show your interest</h6>
       <ion-item class="box" padding-bot>
         <tag-input name="tag" [(ngModel)]='profileRequest.tag' [editable]='true' (onTagEdited)="onTagEdited($event)"></tag-input>
       </ion-item>
-      <button type='submit' class="saveButton" ion-button block>Save</button>
+      <div padding-top>
+        <button type='submit' class="saveButton" ion-button block>Save</button>
+      </div>
     </form>
   </div>
-  <ion-buttons end>
-    <button ion-button icon-only (click)='logOut()'>
-      <ion-icon name='log-out'></ion-icon>
-    </button>
-  </ion-buttons>
+  <div class="logoutDiv">
+    <ion-buttons end>
+      <button class="saveButton" (click)='logOut()' ion-button block>Logout</button>
+    </ion-buttons>
+  </div>
 </ion-content>

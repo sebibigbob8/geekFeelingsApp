@@ -4,6 +4,7 @@ import { Component, } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { config } from '../../app/config';
+import { Subject } from 'rxjs/Subject';
 /**
  * Generated class for the CreateRdvPage page.
  *
@@ -23,6 +24,7 @@ export class CreateRdvPage {
   rdvs: any;
   http: any;
   global: any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private auth: AuthProvider) {
 

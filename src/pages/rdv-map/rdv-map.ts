@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
-import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
 import {
   latLng,
@@ -20,12 +19,17 @@ import {
 } from 'leaflet';
 import {Storage} from "@ionic/storage";
 import {DomSanitizer} from "@angular/platform-browser";
-import {RdvListPage} from "../rdv-list/rdv-list";
+import RdvListPage from "../rdv-list/rdv-list";
+
+import {createScope} from "@angular/core/src/profile/wtf_impl";
+import { config } from '../../app/config';
+
 
 @Component({
   selector: 'page-rdv-map',
   templateUrl: 'rdv-map.html',
 })
+
 export class RdvMapPage {
   mapOptions: MapOptions;
   userMarker: Marker[];

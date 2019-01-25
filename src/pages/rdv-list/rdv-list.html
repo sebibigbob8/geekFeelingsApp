@@ -5,9 +5,6 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>RdvList</ion-title>
-  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -17,11 +14,11 @@
     <div class="listRDV">
 
         <a *ngFor="let rdv of rdvs" class="item item-thumbnail-left">
-          <img src="cover.jpg">
           <h4>{{rdv.purposeTitle}}</h4>
           <p>{{rdv.description}}</p>
           <button ion-button color="light">Open</button>
-          <button ion-button color="light" (click)="modifyRdv(rdv)" [navPush]="modifyRdv">Modify</button>
+          <button ion-button color="light" (click)="modifyRdv(rdv)" [navPush]="modifyRdvPage">Modify</button>
+          <button ion-button color="light" (click)="delete(rdv)">Delete</button>
         </a>
     </div>
 <!----------------------------------->
@@ -29,14 +26,12 @@
 
 
 
-
-
-<form  (submit)='onSubmit($event)'>
+<form (submit)='onSubmit($event)'>
     <ion-list>
 
       <!-- Title input -->
       <ion-item>
-        <ion-label floating>Title</ion-label>
+        <ion-label floating formControlName>Title</ion-label>
         <ion-input type='text' name='title'
                    #titleInput='ngModel' [(ngModel)]='createrdv.purposeTitle' required></ion-input>
       </ion-item>
@@ -50,8 +45,8 @@
       <!-- Description input -->
       <ion-item>
         <ion-label floating>Description</ion-label>
-        <ion-input type='text' name='descrition'
-                   #descriptionInput='ngModel' [(ngModel)]='createrdv.description' required></ion-input>
+        <ion-input type='text' name='descrition' #descriptionInput='ngModel' [(ngModel)]='createrdv.description'
+          required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -62,8 +57,7 @@
       <!-- City input -->
       <ion-item>
         <ion-label floating>City</ion-label>
-        <ion-input type='text' name='city'
-                   #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
+        <ion-input type='text' name='city' #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the city is invalid -->
@@ -71,11 +65,12 @@
         <p ion-text color='danger'>City is required.</p>
       </ion-item>
 
-      <!-- location -->
+
+
+      <!-- Location input -->
       <ion-item>
         <ion-label floating>Location</ion-label>
-        <ion-input type='text' name='city'
-                   #locationInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
+        <ion-input type='text' name='location' #locationInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the city is invalid -->
@@ -98,8 +93,7 @@
       <!-- Category input -->
       <ion-item>
         <ion-label floating>Category</ion-label>
-        <ion-input type='text' name='category'
-                   #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
+        <ion-input type='text' name='category' #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the category is invalid -->
