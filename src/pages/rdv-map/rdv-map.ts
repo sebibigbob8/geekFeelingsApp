@@ -18,9 +18,7 @@ import {
   LayerGroup,
   control
 } from 'leaflet';
-import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
-import {createScope} from "@angular/core/src/profile/wtf_impl";
 import {DomSanitizer} from "@angular/platform-browser";
 import {RdvListPage} from "../rdv-list/rdv-list";
 
@@ -41,7 +39,7 @@ export class RdvMapPage {
   layerOtherRdvs = new LayerGroup();
   layerGuestRdvs = new LayerGroup();
   filtersControl = {};
-  rdvListePage= RdvListPage;
+  rdvListePage = RdvListPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public global: GlobalProvider,
               private geolocation: Geolocation, private storage: Storage, private sanitizer: DomSanitizer) {
@@ -52,6 +50,7 @@ export class RdvMapPage {
         tileLayer(tileLayerUrl, tileLayerOptions)
       ],
       zoom: 13,
+      center: [46.53009,6.63599 ] //default
     };
     this.myRdvs = new Array();
     this.otherRdvs = new Array();
@@ -59,7 +58,7 @@ export class RdvMapPage {
     this.markers = {};
   }
 
-  onMapReady(map: Map) {
+  async onMapReady(map: Map) {
     this.map = map;
 
     this.map.on('moveend', () => {
@@ -77,7 +76,7 @@ export class RdvMapPage {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
     //Draw the user RDVS--------------
-    this.storage.get('username').then((usernameGet) => {
+    await this.storage.get('username').then((usernameGet) => {
       this.username = usernameGet;
       this.http.get(`${config.apiUrl}/users/${this.username}/rdv?username=true`, this.global.httpHeader).subscribe(rdvs => {
         this.putRdvOnMap(rdvs, this.myRdvs);
@@ -95,10 +94,12 @@ export class RdvMapPage {
         }
 
         this.filtersControl['Mine'] = this.layerMyRdvs;
+      }, err => {
+        console.error(err);
       });
     }).catch(err => console.warn(err))
     //Draw the others RDVS------------
-    this.http.get(`${config.apiUrl}/rdvs?notmine=true`, this.global.httpHeader).subscribe(rdvs => {
+    await this.http.get(`${config.apiUrl}/rdvs?notmine=true`, this.global.httpHeader).subscribe(rdvs => {
       this.putRdvOnMap(rdvs, this.otherRdvs);
       for (let rdv of this.otherRdvs) {
         var form = document.createElement('div');
@@ -132,7 +133,7 @@ export class RdvMapPage {
       console.error(err);
     });
     //Draw the guests RDVS------------
-    this.http.get(`${config.apiUrl}/rdvs?guest=true`, this.global.httpHeader).subscribe(rdvs => {
+    await this.http.get(`${config.apiUrl}/rdvs?guest=true`, this.global.httpHeader).subscribe(rdvs => {
       this.putRdvOnMap(rdvs, this.guestRdvs);
       for (let rdv of this.guestRdvs) {
         var form = document.createElement('div');
@@ -162,7 +163,7 @@ export class RdvMapPage {
       }
       this.map.addLayer(this.layerGuestRdvs);
       this.filtersControl['Guest'] = this.layerGuestRdvs;
-      control.layers(null,this.filtersControl).addTo(this.map);
+      control.layers(null, this.filtersControl).addTo(this.map);
 
     }, err => {
       console.error(err);
@@ -194,7 +195,6 @@ export class RdvMapPage {
 
   createmarker(LErdv, icon) {
     return marker([LErdv.lat, LErdv.long], {icon: icon}).bindPopup(document.getElementById(LErdv.id));
-
   }
 }
 
