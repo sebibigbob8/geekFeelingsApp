@@ -30,8 +30,8 @@ To save everything you can touch the button "Save" and it will be stored in the 
 
 To logout, touch the button logout.
 
+![](src/assets/RM/profile.PNG)
 
-![](src/assets/RM/profile.jpg)
 
 ## Map
 Show your location on the map.
@@ -39,16 +39,17 @@ Show your location on the map.
 
 ![](src/assets/RM/map.jpg)
 
-Show all the near rendez-vous, the rendez-vous you made and let you manage those rendez-vous.
+Show all the near rendez-vous. From there you can sign up or unsubscribe from rendez-vous.
+The map allow you to choose wich type of rendez-vous you desire on screen (yours, as Guest or others)
+
 ![](src/assets/RM/map_Loc.jpg)
 
 ## Rendez-vous
 List all rendez-vous and let you manage those. 
+3 possibilities :
++ Touch the button modify to update the rendez-vous's informations
++ Touch the button delete to delete the rendez-vous.
++ Fill the form to simply add a new one
 
-Touch the button modify to manage the rendez-vous. Fill the formular to modify the rendez-vous and save it.
 
-Touch the button delete to delete the rendez-vous.
-
-It's also possible to add a rendez-vous by touching the button add on top of the screen.
-
-![](src/assets/RM/rdv_list.jpg)
+![](src/assets/RM/rdvList.PNG)

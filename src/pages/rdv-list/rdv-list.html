@@ -15,7 +15,6 @@
     <a *ngFor="let rdv of rdvs" class="item item-thumbnail-left">
       <h4>{{rdv.purposeTitle}}</h4>
       <p>{{rdv.description}}</p>
-      <button ion-button color="light">Open</button>
       <button ion-button color="light" (click)="goUpdate(rdv)">Modify</button>
       <button ion-button color="light" (click)="delete(rdv)">Delete</button>
     </a>
@@ -75,8 +74,7 @@
 
       <!-- Date input -->
       <ion-item>
-        <ion-label floating>Date</ion-label>
-        <ion-input type='Date' name='date'
+                <ion-input type='Date' name='date'
                    #dateInput='ngModel' [(ngModel)]='createrdv.date' required></ion-input>
       </ion-item>
 
