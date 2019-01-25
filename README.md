@@ -22,12 +22,12 @@ Fill the formular to register yourself. Choose a First name, a username, a passw
 ![](src/assets/RM/register.jpg)
 
 ## Profile
-All the account photos are here. It's possible to add new ones by touching the "plus" button, change the description by touching it. To be able to show people your interests, add new one by touching the "enter a new tag" input. Just fill one of your interest and press "enter". Delete it by touching the cross on the tag.
+All the account photos are here. It's possible to add new ones by touching the "plus" button, change the description by touching it. Then you take a photo and validate it if it suits you. To be able to show people your interests, add new one by touching the "enter a new tag" input. Just fill one of your interest and press "enter". Delete it by touching the cross on the tag.
 To save everything you can touch the button "Save" and it will be stored in the datebase.
 
 To logout, touch the button logout.
 
-![](src/assets/RM/register.jpg)
+![](src/assets/RM/profile.jpg)
 
 ## Map
 Show your location on the map.
@@ -36,3 +36,12 @@ Show your location on the map.
 
 Show all the near rendez-vous, the rendez-vous you made and let you manage those rendez-vous.
 ![](src/assets/RM/map_Loc.jpg)
+
+## Rendez-vous
+List all rendez-vous and let you manage those. 
+
+Touch the button modify to manage the rendez-vous. Fill the formular to modify the rendez-vous and save it.
+
+Touch the button delete to delete the rendez-vous.
+
+It's also possible to add a rendez-vous by touching the button add on top of the screen.
