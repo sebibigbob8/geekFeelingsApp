@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
-import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
 import {latLng, MapOptions, tileLayer, marker, Marker, Map} from 'leaflet';
 import { RdvListPage } from '../rdv-list/rdv-list';

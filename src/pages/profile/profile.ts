@@ -74,7 +74,6 @@ export class ProfilePage {
       let url = `${config.apiUrl}/pictures`;
       console.log("My request picture: " + Object.keys(this.picture));
       this.pictureRequest.src = this.picture.url;
-      this.pictureRequest.description = this.picture.createdAt;
       this.http.post(url, this.pictureRequest, this.global.httpHeader).subscribe(picture => {
         console.log("new picture :" + picture);
         this.navCtrl.setRoot(this.navCtrl.getActive().component); //reload page
@@ -91,7 +90,7 @@ export class ProfilePage {
     this.pictureService.takeAndUploadPicture().subscribe(picture => {
       this.picture = picture;
     }, err => {
-      console.warn('Could not take picture', err);
+      console.warn('Could not take picture', err.message);
     });
   }
 

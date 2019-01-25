@@ -9,13 +9,9 @@
 
 
 <ion-content padding>
-<<<<<<< HEAD
   <h6 padding-top>Create RDV</h6>
 
   <form (submit)='onSubmit($event)'>
-=======
-  <form  (submit)='onSubmit($event)'>
->>>>>>> a84f4293f3725066c5c47ffa8cd5840399c8bc85
     <ion-list>
 
       <!-- Title input -->
@@ -33,13 +29,8 @@
       <!-- Description input -->
       <ion-item>
         <ion-label floating>Description</ion-label>
-<<<<<<< HEAD
         <ion-input type='text' name='descrition' #descriptionInput='ngModel' [(ngModel)]='createrdv.descrition'
           required></ion-input>
-=======
-        <ion-input type='text' name='descrition'
-                   #descriptionInput='ngModel' [(ngModel)]='createrdv.description' required></ion-input>
->>>>>>> a84f4293f3725066c5c47ffa8cd5840399c8bc85
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -61,12 +52,7 @@
       <!-- NPA input -->
       <ion-item>
         <ion-label floating>NPA</ion-label>
-<<<<<<< HEAD
         <ion-input type='Number' name='NPA' #NPAInput='ngModel' [(ngModel)]='createrdv.NPA' required></ion-input>
-=======
-        <ion-input type='Number' name='NPA'
-                   #NPAInput='ngModel' [(ngModel)]='createrdv.npa' required></ion-input>
->>>>>>> a84f4293f3725066c5c47ffa8cd5840399c8bc85
       </ion-item>
 
       <!-- Error message displayed if the NPA is invalid -->
