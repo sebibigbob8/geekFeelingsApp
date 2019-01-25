@@ -17,11 +17,11 @@
     <div class="listRDV">
 
         <a *ngFor="let rdv of rdvs" class="item item-thumbnail-left">
-          <img src="cover.jpg">
           <h4>{{rdv.purposeTitle}}</h4>
           <p>{{rdv.description}}</p>
           <button ion-button color="light">Open</button>
-          <button ion-button color="light" (click)="modifyRdv(rdv)" [navPush]="modifyRdv">Modify</button>
+          <button ion-button color="light" (click)="modifyRdv(rdv)" [navPush]="modifyRdvPage">Modify</button>
+          <button ion-button color="light" (click)="delete(rdv)">Delete</button>
         </a>
     </div>
 <!----------------------------------->

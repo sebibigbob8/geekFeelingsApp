@@ -22,7 +22,7 @@
 
       <!-- Title input -->
       <ion-item>
-        <ion-label floating>{{rdv.purposeTitle}}</ion-label>
+        <ion-label floating>{{rdvToModify.purposeTitle}}</ion-label>
         <ion-input type='text' name='title'
                    #titleInput='ngModel' [(ngModel)]='createrdv.purposeTitle' required></ion-input>
       </ion-item>
@@ -35,7 +35,7 @@
 
       <!-- Description input -->
       <ion-item>
-        <ion-label floating>{{rdv.description}}</ion-label>
+        <ion-label floating>{{rdvToModify.description}}</ion-label>
         <ion-input type='text' name='descrition'
                    #descriptionInput='ngModel' [(ngModel)]='createrdv.description' required></ion-input>
       </ion-item>
@@ -47,7 +47,7 @@
 
       <!-- City input -->
       <ion-item>
-        <ion-label floating>{{rdv.city}}</ion-label>
+        <ion-label floating>{{rdvToModify.city}}</ion-label>
         <ion-input type='text' name='city'
                    #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
       </ion-item>
@@ -59,9 +59,9 @@
 
       <!-- NPA input -->
       <ion-item>
-        <ion-label floating>{{rdv.npa}}</ion-label>
+        <ion-label floating>{{rdvToModify.location}}</ion-label>
         <ion-input type='Number' name='NPA'
-                   #NPAInput='ngModel' [(ngModel)]='createrdv.npa' required></ion-input>
+                   #NPAInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the NPA is invalid -->
@@ -69,33 +69,10 @@
         <p ion-text color='danger'>NPA is required.</p>
       </ion-item>
 
-      <!-- Street input -->
-      <ion-item>
-        <ion-label floating>{{rdv.street}}</ion-label>
-        <ion-input type='text' name='street'
-                   #streetInput='ngModel' [(ngModel)]='createrdv.street' required></ion-input>
-      </ion-item>
-
-      <!-- Error message displayed if the Street is invalid -->
-      <ion-item *ngIf='streetInput.invalid && streetInput.dirty' no-lines>
-        <p ion-text color='danger'>Street is required.</p>
-      </ion-item>
-
-      <!-- Street number input -->
-      <ion-item>
-        <ion-label floating>{{rdv.streetNumber}}</ion-label>
-        <ion-input type='Number' name='city'
-                   #streetNumberInput='ngModel' [(ngModel)]='createrdv.streetNumber' required></ion-input>
-      </ion-item>
-
-      <!-- Error message displayed if the street number is invalid -->
-      <ion-item *ngIf='streetNumberInput.invalid && streetNumberInput.dirty' no-lines>
-        <p ion-text color='danger'>Street number is required.</p>
-      </ion-item>
 
       <!-- Date input -->
       <ion-item>
-        <ion-label floating>{{rdv.date}}</ion-label>
+        <ion-label floating>{{rdvToModify.date}}</ion-label>
         <ion-input type='Date' name='date'
                    #dateInput='ngModel' [(ngModel)]='createrdv.date' required></ion-input>
       </ion-item>
@@ -107,7 +84,7 @@
 
       <!-- Category input -->
       <ion-item>
-        <ion-label floating>{{rdv.category}}</ion-label>
+        <ion-label floating>{{rdvToModify.category}}</ion-label>
         <ion-input type='text' name='category'
                    #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
       </ion-item>
