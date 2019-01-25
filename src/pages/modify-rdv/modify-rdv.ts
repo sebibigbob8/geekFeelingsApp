@@ -1,3 +1,4 @@
+import { RdvService } from './../RdvService';
 import { RdvListPage } from './../rdv-list/rdv-list';
 import { NavController, NavParams } from 'ionic-angular';
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
@@ -26,8 +27,9 @@ import { Subscription } from 'rxjs';
 export class ModifyRdvPage implements OnInit, OnDestroy{
 
   createrdv: CreateRDV;
-  rdvSubscription: Subscription;
-  RdvListPage: any;
+  rdvsSubscription: Subscription;
+  RdvsListPage: any;
+  RdvService: any;
   ngOnDestroy(): void {
     throw new Error("Method not implemented.");
   }
@@ -53,21 +55,21 @@ export class ModifyRdvPage implements OnInit, OnDestroy{
   constructor(public navCtrl: NavController, public navParams: NavParams, public global: GlobalProvider,
               private http: HttpClient, public registerEvent: Events) {
 
-                console.log("la vie");
+                console.log("Je me construis 2");
 
-                //console.log(this.rdvToModify);
+                console.log(this.rdvToModify);
   }
 
 
   ngOnInit() {
-    this.rdvSubscription = this.rdvListPage.rdvSubject.subscribe(
+    this.rdvsSubscription = this.RdvService.rdvSubject.subscribe(
       (rdvSelected: CreateRDV) => {
         this.rdvToModify = rdvSelected;
-        console.log("la vie2");
+        console.log("Je me construis");
         console.log(this.rdvToModify);
       }
     );
-    this.RdvListPage.emitRdv();
+    this.RdvService.emitRdv();
   }
 
 
