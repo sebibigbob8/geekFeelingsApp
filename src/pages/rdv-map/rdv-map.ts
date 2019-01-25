@@ -2,17 +2,18 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpClient} from "@angular/common/http";
 import {GlobalProvider} from "../../providers/global/global";
-import {config} from "../../app/config";
 import {Geolocation} from '@ionic-native/geolocation';
 import {latLng, MapOptions, tileLayer, marker, Marker, Map, icon, popup, DomUtil, DomEvent} from 'leaflet';
 import {CreateRDV} from "../../models/create-rdv";
 import {Storage} from "@ionic/storage";
 import {createScope} from "@angular/core/src/profile/wtf_impl";
+import { config } from '../../app/config';
 
 @Component({
   selector: 'page-rdv-map',
   templateUrl: 'rdv-map.html',
 })
+
 export class RdvMapPage {
   mapOptions: MapOptions;
   userMarker: Marker[];

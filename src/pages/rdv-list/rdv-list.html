@@ -5,9 +5,6 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>RdvList</ion-title>
-  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -48,8 +45,8 @@
       <!-- Description input -->
       <ion-item>
         <ion-label floating>Description</ion-label>
-        <ion-input type='text' name='descrition'
-                   #descriptionInput='ngModel' [(ngModel)]='createrdv.description' required></ion-input>
+        <ion-input type='text' name='descrition' #descriptionInput='ngModel' [(ngModel)]='createrdv.description'
+          required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -60,8 +57,7 @@
       <!-- City input -->
       <ion-item>
         <ion-label floating>City</ion-label>
-        <ion-input type='text' name='city'
-                   #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
+        <ion-input type='text' name='city' #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the city is invalid -->
@@ -69,11 +65,12 @@
         <p ion-text color='danger'>City is required.</p>
       </ion-item>
 
-      <!-- location -->
+
+
+      <!-- Location input -->
       <ion-item>
         <ion-label floating>Location</ion-label>
-        <ion-input type='text' name='city'
-                   #locationInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
+        <ion-input type='text' name='location' #locationInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the city is invalid -->
@@ -96,8 +93,7 @@
       <!-- Category input -->
       <ion-item>
         <ion-label floating>Category</ion-label>
-        <ion-input type='text' name='category'
-                   #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
+        <ion-input type='text' name='category' #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the category is invalid -->

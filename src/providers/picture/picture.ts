@@ -87,7 +87,6 @@ export class PictureProvider {
         Authorization: `Bearer ${config.qimgSecret}`
       }
     };
-
     return this.http.post<QimgImage>(`${config.qimgUrl}/images`, requestBody, requestOptions);
   }
 

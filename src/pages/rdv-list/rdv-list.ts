@@ -23,7 +23,7 @@ import { Subject } from 'rxjs';
   selector: 'page-rdv-list',
   templateUrl: 'rdv-list.html',
 })
-export class RdvListPage {
+export default class RdvListPage {
 
 
   /**
@@ -31,8 +31,7 @@ export class RdvListPage {
    */
   createRdvError: boolean;
   modifyRdvPage = ModifyRdvPage;
-  //rdvSubject = new Subject<CreateRDV>();
-  rdvForm: FormGroup;
+
 
 
 

@@ -2,6 +2,7 @@
 //config files and switch in the console to the one you need to use.
 
 export const config = {
-  apiUrl: 'https://example.com/api'
+  apiUrl: 'https://comem-webserv-2018-2019-g.herokuapp.com',
+  qimgUrl: 'https://comem-webserv-2018-2019-g.herokuapp.com',
+  qimgSecret: 'changeme'
 }
-
