@@ -1,5 +1,8 @@
 # GeekFeelings
-This app is linked to the GeekFeelings API developped during the Webserv course.It's dedicated to the phone. It provide the use of camera and geolocalisation features.
+This app is linked to the GeekFeelings API developped during the Webserv course. It's dedicated to the phone. It provide the use of camera and geolocalisation features.
+# Description
+This application is part of a lesson at the Heig-vd. The objective is to create an application based on an API that we have developped.
+The application is developped on Angular with Ionic.
 # Deployment
 The application has not been published on the Play Store or the Apple Store. It can be deployed to a phone using Ionic built in tools. See Ionic documentation on testing and deploying the app on a phone.
 # What do we provide with our application
@@ -27,10 +30,12 @@ To save everything you can touch the button "Save" and it will be stored in the 
 
 To logout, touch the button logout.
 
+
 ![](src/assets/RM/profile.jpg)
 
 ## Map
 Show your location on the map.
+
 
 ![](src/assets/RM/map.jpg)
 
