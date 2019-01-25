@@ -7,10 +7,10 @@
 <ion-header>
 </ion-header>
 <ion-content padding>
-  <div class='map' leaflet [leafletOptions]='mapOptions' [leafletLayers]='mapMarkers' (leafletMapReady)='onMapReady($event)'></div>
+  <form id="popup-form">
+    <label id="titleLabel">{{currentPopup.titre}}</label>
+    <button id="popupSubmit" type="button">Sign Up</button>
+  </form>
+  <div class='map' leaflet [leafletOptions]='mapOptions' [leafletLayers]='userMarker' (leafletMapReady)='onMapReady($event)'></div>
 </ion-content>
-<ion-footer>
-  <div>
-    <button class="saveButton addRDV" [navPush]="registerPage" ion-button block>Add a rendez-vous</button>
-  </div>
-</ion-footer>
+

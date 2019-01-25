@@ -1,48 +1,30 @@
 <!--
-  Generated template for the RdvListPage page.
+  Generated template for the ModifyRdvPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-<<<<<<< HEAD
-=======
+
   <ion-navbar>
-    <ion-title>RdvList</ion-title>
+    <ion-title>modify-rdvPage</ion-title>
   </ion-navbar>
->>>>>>> ea8b7f0457f61f7ee9e64a0f11e78fc63883a692
+
 </ion-header>
-
-<ion-content>
-
-
-  <!-- Liste of rdv from the user -->
-    <div class="listRDV">
-
-        <a *ngFor="let rdv of rdvs" class="item item-thumbnail-left">
-          <img src="cover.jpg">
-          <h4>{{rdv.purposeTitle}}</h4>
-          <p>{{rdv.description}}</p>
-          <button ion-button color="light">Open</button>
-          <button ion-button color="light" (click)="modifyRdv(rdv)" [navPush]="modifyRdv">Modify</button>
-        </a>
-    </div>
-<!----------------------------------->
-
-
 
 
 <ion-content padding>
-  <h6 padding-top>Create RDV</h6>
 
+  <!-------- Modifications form -------->
 
 <form  (submit)='onSubmit($event)'>
     <ion-list>
 
       <!-- Title input -->
       <ion-item>
-        <ion-label floating>Title</ion-label>
-        <ion-input type='text' name='title' #titleInput='ngModel' [(ngModel)]='createrdv.purposeTitle' required></ion-input>
+        <ion-label floating>{{rdv.purposeTitle}}</ion-label>
+        <ion-input type='text' name='title'
+                   #titleInput='ngModel' [(ngModel)]='createrdv.purposeTitle' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the username is invalid -->
@@ -53,9 +35,9 @@
 
       <!-- Description input -->
       <ion-item>
-        <ion-label floating>Description</ion-label>
-        <ion-input type='text' name='descrition' #descriptionInput='ngModel' [(ngModel)]='createrdv.descrition'
-          required></ion-input>
+        <ion-label floating>{{rdv.description}}</ion-label>
+        <ion-input type='text' name='descrition'
+                   #descriptionInput='ngModel' [(ngModel)]='createrdv.description' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the description is invalid -->
@@ -65,8 +47,9 @@
 
       <!-- City input -->
       <ion-item>
-        <ion-label floating>City</ion-label>
-        <ion-input type='text' name='city' #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
+        <ion-label floating>{{rdv.city}}</ion-label>
+        <ion-input type='text' name='city'
+                   #cityInput='ngModel' [(ngModel)]='createrdv.city' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the city is invalid -->
@@ -74,11 +57,11 @@
         <p ion-text color='danger'>City is required.</p>
       </ion-item>
 
-      <!-- location -->
+      <!-- NPA input -->
       <ion-item>
-<<<<<<< HEAD
-        <ion-label floating>NPA</ion-label>
-        <ion-input type='Number' name='NPA' #NPAInput='ngModel' [(ngModel)]='createrdv.NPA' required></ion-input>
+        <ion-label floating>{{rdv.npa}}</ion-label>
+        <ion-input type='Number' name='NPA'
+                   #NPAInput='ngModel' [(ngModel)]='createrdv.npa' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the NPA is invalid -->
@@ -88,8 +71,9 @@
 
       <!-- Street input -->
       <ion-item>
-        <ion-label floating>Street</ion-label>
-        <ion-input type='text' name='street' #streetInput='ngModel' [(ngModel)]='createrdv.street' required></ion-input>
+        <ion-label floating>{{rdv.street}}</ion-label>
+        <ion-input type='text' name='street'
+                   #streetInput='ngModel' [(ngModel)]='createrdv.street' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the Street is invalid -->
@@ -99,36 +83,33 @@
 
       <!-- Street number input -->
       <ion-item>
-        <ion-label floating>Street number</ion-label>
-        <ion-input type='Number' name='city' #streetNumberInput='ngModel' [(ngModel)]='createrdv.streetNumber' required></ion-input>
-=======
-        <ion-label floating>Location</ion-label>
-        <ion-input type='text' name='city'
-                   #locationInput='ngModel' [(ngModel)]='createrdv.location' required></ion-input>
->>>>>>> ea8b7f0457f61f7ee9e64a0f11e78fc63883a692
+        <ion-label floating>{{rdv.streetNumber}}</ion-label>
+        <ion-input type='Number' name='city'
+                   #streetNumberInput='ngModel' [(ngModel)]='createrdv.streetNumber' required></ion-input>
       </ion-item>
 
-      <!-- Error message displayed if the city is invalid -->
-      <ion-item *ngIf='locationInput.invalid && locationInput.dirty' no-lines>
-        <p ion-text color='danger'>Location is required.</p>
+      <!-- Error message displayed if the street number is invalid -->
+      <ion-item *ngIf='streetNumberInput.invalid && streetNumberInput.dirty' no-lines>
+        <p ion-text color='danger'>Street number is required.</p>
       </ion-item>
 
       <!-- Date input -->
       <ion-item>
-        <ion-label floating>Date</ion-label>
+        <ion-label floating>{{rdv.date}}</ion-label>
         <ion-input type='Date' name='date'
                    #dateInput='ngModel' [(ngModel)]='createrdv.date' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the date is invalid -->
       <ion-item *ngIf='dateInput.invalid && dateInput.dirty' no-lines>
-        <p ion-text color='danger'>Date is required.</p>
+        <p ion-text color='danger'>Street number is required.</p>
       </ion-item>
 
       <!-- Category input -->
       <ion-item>
-        <ion-label floating>Category</ion-label>
-        <ion-input type='text' name='category' #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
+        <ion-label floating>{{rdv.category}}</ion-label>
+        <ion-input type='text' name='category'
+                   #categoryInput='ngModel' [(ngModel)]='createrdv.category' required></ion-input>
       </ion-item>
 
       <!-- Error message displayed if the category is invalid -->
@@ -140,10 +121,14 @@
     <div padding>
 
       <!-- Submit button -->
-      <button type='submit' [disabled]='form.invalid' ion-button block>Submit</button>
+      <button type='submit' [disabled]='form.invalid' ion-button block>Soumettre</button>
 
       <!-- Error message displayed if the login failed -->
       <p *ngIf='createRdvError' ion-text color='danger'>You might have done something wrong, please check your inputs.</p>
     </div>
   </form>
+
+
+<!----------------------------------->
+
 </ion-content>
